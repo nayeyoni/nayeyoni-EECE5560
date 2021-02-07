@@ -1,0 +1,13 @@
+<launch>
+<include file="$(find mystery_package)/launch/launch_mystery.launch"/>
+
+  <group ns="ros">
+  
+    <node pkg="ros_package" name="ros_node" type="ros_node.py"/>
+    <node pkg="ros_package" name="sub_node" type="sub_node.py"/>
+    
+  </group>
+  
+</launch>
+  
+

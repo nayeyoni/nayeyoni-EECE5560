@@ -7,16 +7,16 @@ def fib():
     pub = rospy.Publisher("input", Float32, queue_size=10)
     a = 0
     b = 1
-    rospy.loginfo(a)
+    #rospy.loginfo(a)
     pub.publish(a)
-    rospy.loginfo(b)
+    #rospy.loginfo(b)
     pub.publish(b)
     rate = rospy.Rate(1) #1hz
     while not rospy.is_shutdown():
     	c = a + b
     	a = b
     	b = c
-    	rospy.loginfo(c)
+    	#rospy.loginfo(c)
     	pub.publish(c)
     	rate.sleep()
     	
