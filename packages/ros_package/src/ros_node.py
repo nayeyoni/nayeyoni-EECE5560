@@ -4,7 +4,7 @@ import rospy
 from std_msgs.msg import Float32
 
 def fib():
-    pub = rospy.Publisher("input", Float32, queue_size=10)
+    pub = rospy.Publisher("/mystery/input", Float32, queue_size=10)
     a = 0
     b = 1
     #rospy.loginfo(a)
