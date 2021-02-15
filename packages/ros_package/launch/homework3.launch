@@ -1,0 +1,10 @@
+<launch>
+<include file="$(find ros_package)/launch/ros.launch"/>
+
+  <group ns="ros">
+  
+    <node pkg="ros_package" name="homework3" type="homework3.py"/>
+ 
+  </group>
+  
+</launch>
