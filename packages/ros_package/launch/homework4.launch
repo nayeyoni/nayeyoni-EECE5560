@@ -1,9 +1,10 @@
 <launch>
 <include file="$(find mystery_package)/launch/launch_mystery.launch"/>
-<param name="units" type="string" value="smoots" />
 
   <group ns="ros">
-  
+    <param name="units" type="string" value="smoots" />
+
+    
     <node pkg="ros_package" name="ros_node" type="ros_node.py"/>
     <node pkg="ros_package" name="sub_node" type="sub_node.py">
       <remap from="/mystery/output2" to="/ros/homework3_output"/>
