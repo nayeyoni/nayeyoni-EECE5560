@@ -11,7 +11,7 @@ class transform:
         self.pub_robot =rospy.Publisher("robot_coordinate_frame", Vector2D, queue_size=10)
         self.pub_world =rospy.Publisher("world_coordinate_frame", Vector2D,queue_size=10)
         angle1=radians(180)
-        angle2=(135)
+        angle2=radians(135)
         self.a=cos(angle1)
         self.b=-sin(angle1)
         self.d=sin(angle1)
@@ -38,7 +38,7 @@ class transform:
         self.v = [[msg.x],[msg.y],[1]]
         self.transform1=numpy.matrix([a,b,c],[d,e,f],[g,h,i])
         self.new_v1= self.transform1*self.v
-        self.msg.transform2=numpy.matrix([j,k,l],[m,n,o],[p,q,r])
+        self.transform2=numpy.matrix([j,k,l],[m,n,o],[p,q,r])
         self.new_v2=self.transform2*self.new_v1
         self.pub_robot.publish(self.new_v1)
         self.pub_world.publish(self.new_v2)
