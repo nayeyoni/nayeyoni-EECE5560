@@ -8,12 +8,12 @@ class line:
         self.pub = rospy.Publisher("/nayebot/car_cmd_switch_node", Twist2DStamped, queue_size=10)
 	self.start=self.msg.header.sec
 	self.end=self.start + 2.5
-        while x < self.end
+        while self.start <= self.end
 	    self.msg.omega = 0;
 	    self.msg.v=0.4099999964237213
             self.pub.publish(self.msg.v)
 	    self.pub.publish(self.msg.omega)
-            x = x+1
+            self.start = self.start+1
 
 if __name__ == '__main__':
     rospy.init_node('straight_line' , anonymous=True)
