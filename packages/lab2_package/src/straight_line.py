@@ -7,7 +7,8 @@ class line:
     def __init__(self,msg):
         self.pub = rospy.Publisher("/nayebot/car_cmd_switch_node/cmd", Twist2DStamped, queue_size=10)
         self.start = 0
-        while self.start <= 5
+        self.end = 5
+        while self.start <= self.end
             self.msg.omega = 0
             self.msg.v=0.4099999964237213
             self.pub.publish(self.msg.v)
