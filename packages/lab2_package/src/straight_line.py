@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import rospy
-from duckietown_msgs import Twist2DStamped
+from duckietown_msgs.msg import Twist2DStamped
 
 class line:
     def __init__(self,msg):
@@ -10,8 +10,7 @@ class line:
         while self.start < 6:
             self.msg.omega = 0
             self.msg.v=0.4099999964237213
-            self.pub.publish(self.msg.v)
-            self.pub.publish(self.msg.omega)
+            self.pub.publish(self.msg)
             self.start = self.start+1
 
 if __name__ == '__main__':
