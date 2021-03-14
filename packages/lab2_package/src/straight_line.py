@@ -4,7 +4,7 @@ import rospy
 from duckietown_msgs.msg import Twist2DStamped
 
 class line:
-    def __init__(self,msg):
+    def __init__(self):
         self.pub = rospy.Publisher("/nayebot/car_cmd_switch_node/cmd", Twist2DStamped, queue_size=10)
         self.start = 0
         while self.start < 6:
