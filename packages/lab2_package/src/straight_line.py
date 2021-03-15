@@ -8,15 +8,14 @@ class line:
     def __init__(self):
         rospy.Subscriber("/nayebot/fsm_node/mode", FSMState, self.callback)
         self.pub = rospy.Publisher("/nayebot/lane_controller_node/car_cmd", Twist2DStamped, queue_size=10)
-        self.mode = FSMState()
         self.pub_msg = Twist2DStamped()
         self.start = 0
         self.pub_msg.header = std_msgs.msg.Header()
    
-    def callback(self, m):
-        self.mode.state = m.state;
+    def callback(self, mode):
+        self.mode=FSMState()
         if self.mode.state == "LANE_FOLLOWING":
-            while self.start < 5:
+            while self.start < 6:
                 self.pub_msg.header.stamp = rospy.Time.now()
                 self.pub_msg.v=0.4099999964237213
                 self.pub_msg.omega = 0
