@@ -8,14 +8,14 @@ class line:
     def __init__(self):
         self.pub = rospy.Publisher("/nayebot/car_cmd_switch_node/cmd", Twist2DStamped, queue_size=10)
         self.start = 0
-        self.h = std_msgs.msg.Header()
-        self.h.stamp = rospy.Time.now()
+        self.header = std_msgs.msg.Header()
         while self.start < 6:
-            self.omega = 0
+            self.header.stamp = rospy.Time.now()
             self.v=0.4099999964237213
+            self.omega = 0
+            self.pub.publish(self.header)
             self.pub.publish(self.v)
             self.pub.publish(self.omega)
-            self.pub.publish(self.h)
             self.start = self.start+1
 
 if __name__ == '__main__':
