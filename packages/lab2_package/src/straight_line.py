@@ -6,7 +6,7 @@ from duckietown_msgs.msg import Twist2DStamped
 from duckietown_msgs.msg import FSMState
 class line:
     def __init__(self):
-        rospy.Subscriber("/nayebot/fsm_node/mode", FSMState, self.callback)
+        self.mode = rospy.Subscriber("/nayebot/fsm_node/mode", FSMState, self.callback)
         self.pub = rospy.Publisher("/nayebot/lane_controller_node/car_cmd", Twist2DStamped, queue_size=10)
         self.pub_msg = Twist2DStamped()
         self.start = 0
