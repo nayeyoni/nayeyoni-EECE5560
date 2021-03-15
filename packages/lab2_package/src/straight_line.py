@@ -14,6 +14,7 @@ class line:
    
     def callback(self, mode):
         self.mode=FSMState()
+        rospy.loginfo("state", self.mode.state)
         if self.mode.state == "LANE_FOLLOWING":
             while self.start < 6:
                 self.pub_msg.header.stamp = rospy.Time.now()
@@ -21,7 +22,7 @@ class line:
                 self.pub_msg.omega = 0
                 self.pub.publish(self.pub_msg)
                 self.start = self.start+1
-    
+        else:
 if __name__ == '__main__':
     rospy.init_node('straight_line' , anonymous=True)
     line()
