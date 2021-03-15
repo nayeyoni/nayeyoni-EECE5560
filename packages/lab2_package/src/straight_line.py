@@ -3,7 +3,7 @@
 import rospy
 import std_msgs.msg
 from duckietown_msgs.msg import Twist2DStamped
-from duckietown_msgs import FSMState
+from duckietown_msgs.msg import FSMState
 class line:
     def __init__(self):
         rospy.Subscriber("/nayebot/fsm_node/mode", FSMState, self.callback)
