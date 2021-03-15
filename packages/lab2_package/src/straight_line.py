@@ -14,7 +14,7 @@ class line:
    
     def callback(self, mode):
         self.mode=FSMState()
-        rospy.loginfo("state", self.mode.state)
+        rospy.loginfo("state %s", self.mode.state)
         if self.mode.state == "LANE_FOLLOWING":
             while self.start < 6:
                 self.pub_msg.header.stamp = rospy.Time.now()
