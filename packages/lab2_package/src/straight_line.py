@@ -22,7 +22,7 @@ class line:
                 self.pub_msg.omega = 0
                 self.pub.publish(self.pub_msg)
                 self.start = self.start+1
-        else:
+
 if __name__ == '__main__':
     rospy.init_node('straight_line' , anonymous=True)
     line()
