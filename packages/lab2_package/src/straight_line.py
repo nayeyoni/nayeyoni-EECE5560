@@ -10,7 +10,7 @@ class line:
         self.pub_msg = Twist2DStamped()
         self.start = 0
         self.pub_msg.header = std_msgs.msg.Header()
-        while self.start < 6:
+        while self.start < 100000:
             self.pub_msg.header.stamp = rospy.Time.now()
             self.pub_msg.v=0.4099999964237213
             self.pub_msg.omega = 0
