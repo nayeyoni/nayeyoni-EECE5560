@@ -10,7 +10,7 @@ class line:
         self.pub_msg = Twist2DStamped()
         self.start = 0
         self.pub_msg.header = std_msgs.msg.Header()
-        if pub_msg.state == "LANE_FOLLOWING":
+        if self.pub_msg.state == "LANE_FOLLOWING":
             while self.start < 100:
                 self.pub_msg.header.stamp = rospy.Time.now()
                 self.pub_msg.v=0.4099999964237213
