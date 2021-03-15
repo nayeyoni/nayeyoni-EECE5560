@@ -6,13 +6,15 @@ from duckietown_msgs.msg import Twist2DStamped
 from duckietown_msgs.msg import FSMState
 class line:
     def __init__(self):
-        self.mode = rospy.Subscriber("/nayebot/fsm_node/mode", FSMState, self.callback)
+        rospy.Subscriber("/nayebot/fsm_node/mode", FSMState, self.callback)
         self.pub = rospy.Publisher("/nayebot/lane_controller_node/car_cmd", Twist2DStamped, queue_size=10)
+        self.mode = FSMState()
         self.pub_msg = Twist2DStamped()
         self.start = 0
         self.pub_msg.header = std_msgs.msg.Header()
    
-    def callback(self, mode):
+    def callback(self, m):
+        self.mode.state = m.state;
         if self.mode.state == "LANE_FOLLOWING":
             while self.start < 5:
                 self.pub_msg.header.stamp = rospy.Time.now()
