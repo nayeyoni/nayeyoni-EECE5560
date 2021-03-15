@@ -6,11 +6,11 @@ from duckietown_msgs.msg import Twist2DStamped
 
 class line:
     def __init__(self):
-        self.pub = rospy.Publisher("/nayebot/car_cmd_switch_node/cmd", Twist2DStamped, queue_size=10)
+        self.pub = rospy.Publisher("/nayebot/joy_mapper_node/car_cmd", Twist2DStamped, queue_size=10)
         self.pub_msg = Twist2DStamped()
         self.start = 0
         self.pub_msg.header = std_msgs.msg.Header()
-        while self.start < 100000:
+        while self.start < 10:
             self.pub_msg.header.stamp = rospy.Time.now()
             self.pub_msg.v=0.4099999964237213
             self.pub_msg.omega = 0
