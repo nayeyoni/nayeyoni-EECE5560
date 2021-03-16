@@ -5,6 +5,9 @@ import std_msgs.msg
 from std_srvs.srv import SetBool
 from duckietown_msgs.msg import Twist2DStamped
 from duckietown_msgs.msg import FSMState
+
+flag = False
+
 class line:
     def __init__(self):
         rospy.Subscriber("/nayebot/fsm_node/mode", FSMState, self.callback)
@@ -22,7 +25,7 @@ class line:
             self.start = self.start+1
 
     def callback(self, mode):
-        if mode.state == 'LANE_FOLLOWING':
+        if mode.state == 'LANE_FOLLOWING' and flag == False:
            flag = True
         else:
            flag = False  
