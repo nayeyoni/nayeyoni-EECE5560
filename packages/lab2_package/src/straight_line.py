@@ -12,8 +12,8 @@ class line:
         self.pub_msg = Twist2DStamped()
         self.start = 0
         self.pub_msg.header = std_msgs.msg.Header()
-
-        if self.flag == True:
+        
+        if flag == True:
             while self.start < 5:   
                 self.pub_msg.header.stamp = rospy.Time.now()
                 self.pub_msg.v=0.4099999964237213
@@ -23,15 +23,15 @@ class line:
 
     def callback(self, mode):
         if mode.state == 'LANE_FOLLOWING':
-           self.flag = True
+           flag = True
         else:
-           self.flag = False  
+           flag = False  
 
 if __name__ == '__main__':
     rospy.init_node('straight_line' , anonymous=True)
     line()
-    if self.flag == False:
+    if flag == False:
         rospy.spin()
-    if self.flag == True:
+    if flag == True:
         rospy.signal_shutdown('Path is done')
     
