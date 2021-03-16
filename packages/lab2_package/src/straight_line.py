@@ -15,7 +15,7 @@ class line:
     def callback(self, mode):
         time = rospy.Time.now().secs
         if mode.state == 'LANE_FOLLOWING':
-            while (rospy.Time.now().secs - time) < 4:
+            while (rospy.Time.now().secs - time) < 2.5:
                 self.pub_msg.v=0.4099999964237213
                 self.pub_msg.omega = 0
                 self.pub.publish(self.pub_msg)
