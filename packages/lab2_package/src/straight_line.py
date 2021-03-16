@@ -14,12 +14,17 @@ class line:
    
     def callback(self, mode):
         if mode.state == 'LANE_FOLLOWING':
-            while self.start < 6:
+            while self.start < 3:
                 self.pub_msg.header.stamp = rospy.Time.now()
                 self.pub_msg.v=0.4099999964237213
                 self.pub_msg.omega = 0
                 self.pub.publish(self.pub_msg)
                 self.start = self.start+1
+            while mode.state == 'LANE_FOLLOWING':
+                self.pub_msg.header.stamp = rospy.Time.now()
+                self.pub_msg.v=0
+                self.pub_msg.omega = 0
+                self.pub.publish(self.pub_msg)
 
 if __name__ == '__main__':
     rospy.init_node('straight_line' , anonymous=True)
