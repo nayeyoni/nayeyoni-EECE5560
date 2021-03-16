@@ -6,6 +6,8 @@ from std_srvs.srv import SetBool
 from duckietown_msgs.msg import Twist2DStamped
 from duckietown_msgs.msg import FSMState
 
+global flag
+
 class line:
     def __init__(self):
         self.flag = SetBool() 
@@ -27,15 +29,15 @@ class line:
 
     def callback(self, mode):
         if mode.state == 'LANE_FOLLOWING': 
-           self.flag = True
+           flag = True
         else:
-           self.flag = False  
+           flag = False  
 
 if __name__ == '__main__':
     rospy.init_node('straight_line' , anonymous=True)
     l = line()
     time  = rospy.Time.now().secs
-    if self.flag == True:
+    if flag == True:
         while (rospy.Time.now().secs - time) < 4:
             l.move_straight()
         l.stop()
