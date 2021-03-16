@@ -20,7 +20,11 @@ class line:
                 self.pub_msg.omega = 0
                 self.pub.publish(self.pub_msg)
                 self.start = self.start+1
-            mode.state == 'NORMAL_JOYSTICK_CONTROL'
+        if mode.state == 'LANE_FOLLOWING':
+            self.pub_msg.header.stamp = rospy.Time.now()
+            self.pub_msg.v=0
+            self.pub_msg.omega = 0
+            self.pub.publish(self.pub_msg)
 
 if __name__ == '__main__':
     rospy.init_node('straight_line' , anonymous=True)
