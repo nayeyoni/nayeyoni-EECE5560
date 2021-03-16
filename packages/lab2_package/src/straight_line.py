@@ -19,6 +19,9 @@ class line:
                 self.pub_msg.v=0.4099999964237213
                 self.pub_msg.omega = 0
                 self.pub.publish(self.pub_msg)
+            self.pub_msg.v=0
+            self.pub_msg.omega = 0
+            self.pub.publish(self.pub_msg)
             rospy.signal_shutdown('Path is done')
 
 if __name__ == '__main__':
