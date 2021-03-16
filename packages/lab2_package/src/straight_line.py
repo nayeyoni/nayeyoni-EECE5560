@@ -6,9 +6,10 @@ from std_srvs.srv import SetBool
 from duckietown_msgs.msg import Twist2DStamped
 from duckietown_msgs.msg import FSMState
 
-flag = False
+
 
 class line:
+    flag = False
     def __init__(self):
         rospy.Subscriber("/nayebot/fsm_node/mode", FSMState, self.callback)
         self.pub = rospy.Publisher("/nayebot/lane_controller_node/car_cmd", Twist2DStamped, queue_size=10)
