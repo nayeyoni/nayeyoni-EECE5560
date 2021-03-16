@@ -37,9 +37,9 @@ if __name__ == '__main__':
     l=line()
     start = 0
     if flag == True:
-            while start < 4:
-               l.move_straight()
-               start = start + 1
+        while start < 4:
+            l.move_straight()
+            start = start + 1
             l.stop()
     else:
             rospy.spin()
