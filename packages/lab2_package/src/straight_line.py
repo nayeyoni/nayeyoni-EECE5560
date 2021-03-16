@@ -22,8 +22,8 @@ class line:
         self.pub.publish(pub_msg)
         
     def stop(self):
-        self.pub_msg.v=0
-        self.pub_msg.omega = 0
+        pub_msg.v=0
+        pub_msg.omega = 0
         self.pub.publish(pub_msg)
 
     def callback(self, mode):
@@ -34,6 +34,7 @@ class line:
 
 if __name__ == '__main__':
     rospy.init_node('straight_line' , anonymous=True)
+    flag = False
     l=line()
     start = 0
     if flag == True:
