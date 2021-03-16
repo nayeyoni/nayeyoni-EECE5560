@@ -40,6 +40,6 @@ if __name__ == '__main__':
         while start < 4:
             l.move_straight()
             start = start + 1
-            l.stop()
+        l.stop()
     else:
-            rospy.spin()
+        rospy.spin()
