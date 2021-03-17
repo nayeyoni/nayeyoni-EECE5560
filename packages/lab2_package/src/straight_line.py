@@ -21,7 +21,7 @@ class line:
                 self.pub_msg.v=0.4099999964237213
                 self.pub_msg.omega = 0
                 self.pub.publish(self.pub_msg)
-                rate.sleep(10)
+                rate.sleep()
             self.pub_msg.v=0
             self.pub_msg.omega = 0
             self.pub.publish(self.pub_msg)
