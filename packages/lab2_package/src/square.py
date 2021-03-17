@@ -21,22 +21,22 @@ class line:
                     self.pub_msg.omega = 0
                     self.pub.publish(self.pub_msg)
 
-                while (rospy.Time.now().secs - time) < 2.9:
+                while (rospy.Time.now().secs - time) < 3:
                     self.pub_msg.v=0
                     self.pub_msg.omega = 0
                     self.pub.publish(self.pub_msg)
 
-                while (rospy.Time.now().secs - time) < 3.9:
+                while (rospy.Time.now().secs - time) < 5:
                     self.pub_msg.v=0
                     self.pub_msg.omega = 4.5
                     self.pub.publish(self.pub_msg)
 
-                while (rospy.Time.now().secs - time) < 4.3:
+                while (rospy.Time.now().secs - time) < 7:
                     self.pub_msg.v=0
                     self.pub_msg.omega = 0
                     self.pub.publish(self.pub_msg)
 
-            rospy.signal_shutdown('Path is done')
+        rospy.signal_shutdown('Path is done')
 
 if __name__ == '__main__':
     rospy.init_node('straight_line' , anonymous=True)
