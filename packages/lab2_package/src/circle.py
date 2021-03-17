@@ -16,9 +16,9 @@ class line:
         
         if mode.state == 'LANE_FOLLOWING':
             time = rospy.Time.now().secs
-            while (rospy.Time.now().secs - time) < 12:
+            while (rospy.Time.now().secs - time) < 10:
                 self.pub_msg.v=0.4099999964237213
-                self.pub_msg.omega = 2.5
+                self.pub_msg.omega = 4.5
                 self.pub.publish(self.pub_msg)
             self.pub_msg.v=0
             self.pub_msg.omega = 0
