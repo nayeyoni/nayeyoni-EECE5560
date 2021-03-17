@@ -13,9 +13,8 @@ class line:
         self.pub_msg.header.stamp = rospy.Time.now()
 
     def callback(self, mode):
-        
+        time = rospy.Time.now().secs
         if mode.state == 'LANE_FOLLOWING':
-            time = rospy.Time.now().secs
             while (rospy.Time.now().secs - time) < 2.5:
                 self.pub_msg.v=0.4099999964237213
                 self.pub_msg.omega = 0
