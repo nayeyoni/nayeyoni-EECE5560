@@ -21,22 +21,22 @@ class line:
                     self.pub_msg.v=0.4099999964237213
                     self.pub_msg.omega = 0
                     self.pub.publish(self.pub_msg)
-                    
+                    rate.sleep()
                 while (rospy.Time.now().secs - time) < 3.5:
                     self.pub_msg.v=0
                     self.pub_msg.omega = 0
                     self.pub.publish(self.pub_msg)
-                    
-                while (rospy.Time.now().secs - time) < 3.8:
+                    rate.sleep()
+                while (rospy.Time.now().secs - time) < 4.5:
                     self.pub_msg.v=0
-                    self.pub_msg.omega = 8.300000190734863
+                    self.pub_msg.omega = 4
                     self.pub.publish(self.pub_msg)
-                    
-                while (rospy.Time.now().secs - time) < 4.8:
+                    rate.sleep()
+                while (rospy.Time.now().secs - time) < 5.5:
                     self.pub_msg.v=0
                     self.pub_msg.omega = 0
                     self.pub.publish(self.pub_msg)
-                    
+                    rate.sleep()
 
 if __name__ == '__main__':
     rospy.init_node('straight_line' , anonymous=True)
