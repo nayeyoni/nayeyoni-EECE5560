@@ -14,8 +14,9 @@ class line:
 
     def callback(self, mode):
         time = rospy.Time.now().secs
+        i = 0
         if mode.state == 'LANE_FOLLOWING':
-            for i in range(4):
+            while i < 5:
                 while (rospy.Time.now().secs - time) < 2.5:
                     self.pub_msg.v=0.4099999964237213
                     self.pub_msg.omega = 0
@@ -35,8 +36,9 @@ class line:
                     self.pub_msg.v=0
                     self.pub_msg.omega = 0
                     self.pub.publish(self.pub_msg)
+                i = i + 1
 
-        rospy.signal_shutdown('Path is done')
+            rospy.signal_shutdown('Path is done')
 
 if __name__ == '__main__':
     rospy.init_node('straight_line' , anonymous=True)
