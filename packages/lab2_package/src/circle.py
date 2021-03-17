@@ -16,7 +16,7 @@ class line:
         rate = rospy.Rate(25)
         if mode.state == 'LANE_FOLLOWING':
             time = rospy.Time.now().secs
-            while (rospy.Time.now().secs - time) < 8.8:
+            while (rospy.Time.now().secs - time) < 25:
                 self.pub_msg.v=0.45
                 self.pub_msg.omega = 1
                 self.pub.publish(self.pub_msg)

@@ -29,7 +29,7 @@ class line:
                     rate.sleep()
                 while (rospy.Time.now().secs - time) < 4.5:
                     self.pub_msg.v=0
-                    self.pub_msg.omega = 2
+                    self.pub_msg.omega = 1.5
                     self.pub.publish(self.pub_msg)
                     rate.sleep()
                 while (rospy.Time.now().secs - time) < 5.5:
