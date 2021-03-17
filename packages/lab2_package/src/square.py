@@ -14,31 +14,30 @@ class line:
 
     def callback(self, mode):
         time = rospy.Time.now().secs
-        i = 0
+        rate = rospy.Rate(10)
         if mode.state == 'LANE_FOLLOWING':
-            while i < 5:
+            for i in range(4):
                 while (rospy.Time.now().secs - time) < 2.5:
                     self.pub_msg.v=0.4099999964237213
                     self.pub_msg.omega = 0
                     self.pub.publish(self.pub_msg)
+                    rate.sleep()
 
-                while (rospy.Time.now().secs - time) < 3:
+                while (rospy.Time.now().secs - time) < 2.6:
                     self.pub_msg.v=0
                     self.pub_msg.omega = 0
                     self.pub.publish(self.pub_msg)
-
-                while (rospy.Time.now().secs - time) < 5:
+                    rate.sleep()
+                while (rospy.Time.now().secs - time) < 3.6:
                     self.pub_msg.v=0
                     self.pub_msg.omega = 4.5
                     self.pub.publish(self.pub_msg)
-
-                while (rospy.Time.now().secs - time) < 7:
+                    rate.sleep()
+                while (rospy.Time.now().secs - time) < 4.2:
                     self.pub_msg.v=0
                     self.pub_msg.omega = 0
                     self.pub.publish(self.pub_msg)
-                i = i + 1
-
-            rospy.signal_shutdown('Path is done')
+                    rate.sleep()
 
 if __name__ == '__main__':
     rospy.init_node('straight_line' , anonymous=True)
