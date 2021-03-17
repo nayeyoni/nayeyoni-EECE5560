@@ -18,13 +18,12 @@ class line:
             time = rospy.Time.now().secs
             while (rospy.Time.now().secs - time) < 8.8:
                 self.pub_msg.v=0.45
-                self.pub_msg.omega = 2.5
+                self.pub_msg.omega = 1
                 self.pub.publish(self.pub_msg)
                 rate.sleep()
             self.pub_msg.v=0
             self.pub_msg.omega = 0
             self.pub.publish(self.pub_msg)
-            rospy.signal_shutdown('Path is done')
 
 if __name__ == '__main__':
     rospy.init_node('straight_line' , anonymous=True)
