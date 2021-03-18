@@ -13,15 +13,18 @@ class line:
         self.pub_msg.header.stamp = rospy.Time.now()
 
     def callback(self, mode):
+        rate = rospy.Rate(10)
         time = rospy.Time.now().secs
         if mode.state == 'LANE_FOLLOWING':
             while (rospy.Time.now().secs - time) < 2.5:
                 self.pub_msg.v=0.4099999964237213
                 self.pub_msg.omega = 0
                 self.pub.publish(self.pub_msg)
-            self.pub_msg.v=0
-            self.pub_msg.omega = 0
-            self.pub.publish(self.pub_msg)
+                rate.sleep()
+            while (rospy.Time.now().secs - time) < 10:
+                self.pub_msg.v=0
+                self.pub_msg.omega = 0
+                self.pub.publish(self.pub_msg)
             rospy.signal_shutdown('Path is done')
 
 if __name__ == '__main__':
