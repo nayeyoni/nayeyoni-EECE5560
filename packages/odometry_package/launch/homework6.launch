@@ -1,0 +1,10 @@
+<launch>
+<include file="$(find odometry_hw)/launch/odom_hw.launch"/>
+
+  <group ns="ros">
+  
+    <node pkg="odometry_package" name="homework6" type="homework6.py"/>
+ 
+  </group>
+  
+</launch>

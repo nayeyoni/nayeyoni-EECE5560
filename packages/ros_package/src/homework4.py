@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
 import rospy
-from mystery_package.msg import UnitsLabelled
+from mystery_package.msg import Unitslabelled
 
 class homework4:
     def __init__(self):
-        rospy.Subscriber("/mystery/output2", UnitsLabelled, self.callback)
-        self.pub = rospy.Publisher("homework3_output", UnitsLabelled, queue_size=10)
+        rospy.Subscriber("/mystery/output2", Unitslabelled, self.callback)
+        self.pub = rospy.Publisher("homework3_output", Unitslabelled, queue_size=10)
         self.total = 0;
-        self.pub_msg = UnitsLabelled()
+        self.pub_msg = Unitslabelled()
         
     def callback(self, msg):
         if rospy.has_param("units"):
