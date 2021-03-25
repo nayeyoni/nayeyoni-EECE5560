@@ -32,7 +32,7 @@ class homework4:
             self.units = "default"
 if __name__ == '__main__':
     rospy.init_node('homework4')
-    homework4()\
+    homework4()
     
     rospy.spin()
     
