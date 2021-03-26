@@ -1,0 +1,10 @@
+<launch>
+<include file="$(find lab2_package)/launch/square.launch"/>
+
+ <group ns="$(env VEHICLE_NAME)"> 
+
+    <node pkg="odometry_package" name="lab3" type="lab3.py"/>
+
+  </group>
+  
+</launch>
