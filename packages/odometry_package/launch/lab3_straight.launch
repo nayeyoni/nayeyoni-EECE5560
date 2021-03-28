@@ -1,5 +1,5 @@
 <launch>
-<include file="$(find lab2_package)/launch/straight.launch"/>
+<include file="$(find lab2_package)/launch/lab2.launch"/>
 
  <group ns="$(env VEHICLE_NAME)"> 
 
