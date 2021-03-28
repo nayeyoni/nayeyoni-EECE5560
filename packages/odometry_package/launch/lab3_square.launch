@@ -1,6 +1,5 @@
 <launch>
 <include file="$(find lab2_package)/launch/square.launch"/>
-<include file="$(find odometry_hw)/launch/odom_hw.launch"/>
 
  <group ns="$(env VEHICLE_NAME)"> 
 
