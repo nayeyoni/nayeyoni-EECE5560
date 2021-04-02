@@ -14,8 +14,8 @@ class lab3:
 
     def callback(self, distance):
         pose = Pose2D()
-        dist_right = distance.vel_right
-        dist_left = distance.vel_left
+        dist_right = distance.vel_right * 0.1
+        dist_left = distance.vel_left * 0.1
         delta_s=(dist_right + dist_left) / 2
         delta_theta = (dist_right - dist_left) / 0.1
         delta_x = delta_s * cos (self.theta + (delta_theta/2))
