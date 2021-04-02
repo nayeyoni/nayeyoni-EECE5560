@@ -25,7 +25,7 @@ class lab3:
         self.theta = self.theta + delta_theta
         pose.x = self.x
         pose.y = self.y
-        pose.theta = self.theta
+        pose.theta = self.theta * 10
         self.pub.publish(pose)
 
 if __name__ == '__main__':
