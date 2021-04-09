@@ -20,11 +20,11 @@ class homework8:
         self.canny_edge_img = cv2.Canny(self.msg1,100, 255)
         self.pub.publish(canny_edge_img)
         
-    def callback2(self.msg2):
-        self.msg2 = self.bridge.imgmsg_to_cv2(self.msg2, "bgr8")
+    def callback2(self, msg2):
+        self.msg2 = self.bridge.imgmsg_to_cv2(msg2, "bgr8")
         
-    def callback3(self. msg3):
-        self.msg3 = self.bridge.imgmsg_to_cv2(self.msg3, "bgr8")
+    def callback3(self, msg3):
+        self.msg3 = self.bridge.imgmsg_to_cv2(msg3, "bgr8")
 
 if __name__=="__main__":
     
