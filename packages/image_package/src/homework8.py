@@ -29,7 +29,8 @@ class homework8:
     def callback3(self, msg3):
         self.msg3 = self.bridge.imgmsg_to_cv2(msg3, "mono8")
         self.mask = cv2.bitwise_or(self.msg2, self.msg3)
-        self.pub.publish(self.mask)
+        self.output_mask = self.bridge.cv2_to_imgmsg(self.mask, "mono8")
+        self.pub.publish(self.output_mask)
 
 if __name__=="__main__":
     
