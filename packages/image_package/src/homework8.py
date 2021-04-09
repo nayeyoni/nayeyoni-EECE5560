@@ -24,7 +24,8 @@ class homework8:
         rospy.Subscriber("image_cropped", Image, self.callback1)
         rospy.Subscriber("image_white", Image, self.callback2)
         rospy.Subscriber("image_yellow", Image, self.callback3)
-        self.pub = rospy.Publisher("image_output", Image, queue_size=10)
+        self.pub_white = rospy.Publisher("image_lines_whites", Image, queue_size=10)
+        self.pub_yellow = rospy.Publisher("image_lines_yellow", Image, queue_size=10)
         self.bridge = CvBridge()
 
         
@@ -42,11 +43,11 @@ class homework8:
         self.canny_edge_img = cv2.Canny(self.msg1_hsv,150, 255)
         self.msg3 = self.bridge.imgmsg_to_cv2(msg3, "mono8")
         self.mask = cv2.bitwise_or(self.msg2, self.msg3)
-        self.output_edge = cv2.bitwise_and(self.mask, self.canny_edge_img)
-        self.white_lines = cv2.HoughLinesP(self.output_edge, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
+        self.white_edge = cv2.bitwise_and(self.msg2, self.canny_edge_img)
+        self.white_lines = cv2.HoughLinesP(self.white_edge, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
         self.output_white_lines = output_lines(self, self.msg1, self.white_lines)
         self.output_mask = self.bridge.cv2_to_imgmsg(self.output_white_lines, "bgr8")
-        self.pub.publish(self.output_mask)
+        self.pub_white.publish(self.output_mask)
 
 
 if __name__=="__main__":
