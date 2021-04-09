@@ -14,8 +14,8 @@ class homework8:
         self.sub_yellow = message_filters.Subscriber("image_yellow", Image, queue_size=10)
         self.pub = rospy.Publisher("image_output", Image, queue_size=10)
         self.bridge = CvBridge()
-        ts = message_filters.TimeSynchronizer('[self.sub_cropped, self.sub_white, self.sub_yellow], 10',queue_size=10)
-        ts.registerCallback(self.callback)
+        self.ts = message_filters.TimeSynchronizer('[self.sub_cropped, self.sub_white, self.sub_yellow], 10',queue_size=10)
+        self.ts.registerCallback(self.callback)
         
     def callback(self, img_cropped, img_white, img_yellow):
         cropped.img = self.bridge.imgmsg_to_cv2(img_cropped, "bgr8")
