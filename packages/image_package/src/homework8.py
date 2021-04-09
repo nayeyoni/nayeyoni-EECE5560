@@ -30,8 +30,20 @@ class homework8:
         self.msg3 = self.bridge.imgmsg_to_cv2(msg3, "mono8")
         self.mask = cv2.bitwise_or(self.msg2, self.msg3)
         self.output_edge = cv2.bitwise_and(self.mask, self.canny_edge_img)
-        self.output_mask = self.bridge.cv2_to_imgmsg(self.output_edge, "mono8")
+        self.white_lines = cv2.HoughLinesP(self.output_edge, rho = 1, theta = (pi/180), threshold = 100, minLineLength = 1, maxLineGap = 10)
+        self.output_white_lines = output_lines(self, self.msg2, self.white_lines)
+        self.output_mask = self.bridge.cv2_to_imgmsg(self.output_white_lines, "mono8")
         self.pub.publish(self.output_mask)
+
+    def output_lines(self, original_image, lines):
+        output = np.copy(original_image)
+        if lines is not None:
+            for i in range(len(lines)):
+                l = lines[i][0]
+                cv2.line(output, (l[0],l[1]), (l[2],l[3]), (255,0,0), 2, cv2.LINE_AA)
+                cv2.circle(output, (l[0],l[1]), 2, (0,255,0))
+                cv2.circle(output, (l[2],l[3]), 2, (0,0,255))
+        return output
 
 if __name__=="__main__":
     
