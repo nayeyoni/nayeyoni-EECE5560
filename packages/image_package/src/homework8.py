@@ -24,6 +24,16 @@ class homework8:
     def callback2(self, msg2):
         self.msg2 = self.bridge.imgmsg_to_cv2(msg2, "mono8")
         
+    def output_lines(self, original_image, lines):
+        output = np.copy(original_image)
+        if lines is not None:
+            for i in range(len(lines)):
+                l = lines[i][0]
+                cv2.line(output, (l[0],l[1]), (l[2],l[3]), (255,0,0), 2, cv2.LINE_AA)
+                cv2.circle(output, (l[0],l[1]), 2, (0,255,0))
+                cv2.circle(output, (l[2],l[3]), 2, (0,0,255))
+        return output
+        
         
     def callback3(self, msg3):
         self.msg1_hsv = cv2.cvtColor(self.msg1,cv2.COLOR_BGR2HSV)
@@ -36,15 +46,6 @@ class homework8:
         self.output_mask = self.bridge.cv2_to_imgmsg(self.output_white_lines, "mono8")
         self.pub.publish(self.output_mask)
 
-    def output_lines(self, original_image, lines):
-        output = np.copy(original_image)
-        if lines is not None:
-            for i in range(len(lines)):
-                l = lines[i][0]
-                cv2.line(output, (l[0],l[1]), (l[2],l[3]), (255,0,0), 2, cv2.LINE_AA)
-                cv2.circle(output, (l[0],l[1]), 2, (0,255,0))
-                cv2.circle(output, (l[2],l[3]), 2, (0,0,255))
-        return output
 
 if __name__=="__main__":
     
