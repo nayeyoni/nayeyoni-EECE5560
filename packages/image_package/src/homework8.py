@@ -20,7 +20,7 @@ class homework8:
         self.msg1_hsv = cv2.cvtColor(self.msg1,cv2.COLOR_BGR2HSV)
         self.canny_edge_img = cv2.Canny(self.msg1_hsv,100, 255)
         self.output_canny = self.bridge.cv2_to_imgmsg(self.canny_edge_img, "mono8")
-        self.pub.publish(self.output_canny)
+        
         
     def callback2(self, msg2):
         self.msg2 = self.bridge.imgmsg_to_cv2(msg2, "bgr8")
@@ -29,7 +29,7 @@ class homework8:
     def callback3(self, msg3):
         self.msg3 = self.bridge.imgmsg_to_cv2(msg3, "bgr8")
         self.mask = cv2.bitwise_or(self.msg2, self.msg3)
-	
+	self.pub.publish(self.mask)
 
 if __name__=="__main__":
     
