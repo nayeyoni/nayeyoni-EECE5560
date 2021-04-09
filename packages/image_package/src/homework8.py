@@ -46,9 +46,13 @@ class homework8:
         self.white_edge = cv2.bitwise_and(self.msg2, self.canny_edge_img)
         self.white_lines = cv2.HoughLinesP(self.white_edge, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
         self.output_white_lines = output_lines(self, self.msg1, self.white_lines)
-        self.output_mask = self.bridge.cv2_to_imgmsg(self.output_white_lines, "bgr8")
-        self.pub_white.publish(self.output_mask)
-
+        self.output_white = self.bridge.cv2_to_imgmsg(self.output_white_lines, "bgr8")
+        self.pub_white.publish(self.output_white)
+        self.yellow_edge = cv2.bitwise_and(self.msg3, self.canny_edge_img)
+        self.yellow_lines = cv2.HoughLinesP(self.yellow_edge, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
+        self.output_yellow_lines = output_lines(self, self.msg1, self.yellow_lines)
+        self.output_yellow = self.bridge.cv2_to_imgmsg(self.output_yellow_lines, "bgr8")
+        self.pub_yellow.publish(self.output_yellow)
 
 if __name__=="__main__":
     
