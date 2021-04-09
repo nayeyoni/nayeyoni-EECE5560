@@ -24,9 +24,12 @@ class homework8:
         
     def callback2(self, msg2):
         self.msg2 = self.bridge.imgmsg_to_cv2(msg2, "bgr8")
+        self.msg2_hsv = cv2.cvtColor(self.msg2,cv2.COLOR_BGR2HSV)
         
     def callback3(self, msg3):
         self.msg3 = self.bridge.imgmsg_to_cv2(msg3, "bgr8")
+	self.mask = cv2.bitwise_or(self.msg2, self.msg3)
+	
 
 if __name__=="__main__":
     
