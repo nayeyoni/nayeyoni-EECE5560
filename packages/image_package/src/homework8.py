@@ -17,9 +17,10 @@ class homework8:
         
     def callback1(self, msg1):
         self.msg1 = self.bridge.imgmsg_to_cv2(msg1, "bgr8")
-        self.canny_edge_img = cv2.Canny(self.msg1,100, 255)
-        self.output_canny = self.bridge.cv2_to_imgmsg(self.canny_edge_img, "bgr8")
-        self.pub.publish(self.canny_edge_img)
+        self.msg1_hsv = cv2.cvtColor(self.msg1,cv2.COLOR_BGR2HSV)
+        self.canny_edge_img = cv2.Canny(self.msg1_hsv,100, 255)
+        self.output_canny = self.bridge.cv2_to_imgmsg(self.canny_edge_img, "mono8")
+        self.pub.publish(self.output_canny)
         
     def callback2(self, msg2):
         self.msg2 = self.bridge.imgmsg_to_cv2(msg2, "bgr8")
