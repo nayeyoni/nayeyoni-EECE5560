@@ -9,9 +9,9 @@ from cv_bridge import CvBridge
 
 class homework8:
     def __init__(self):
-        self.sub_cropped =rospy.Subscriber("image_cropped", Image, queue_size=10)
-        self.sub_white = rospy.Subscriber("image_white", Image, queue_size=10)
-        self.sub_yellow = rospy.Subscriber("image_yellow", Image, queue_size=10)
+        self.sub_cropped =message_filters.Subscriber("image_cropped", Image, queue_size=10)
+        self.sub_white = message_filters.Subscriber("image_white", Image, queue_size=10)
+        self.sub_yellow = message_filters.Subscriber("image_yellow", Image, queue_size=10)
         self.pub = rospy.Publisher("image_output", Image, queue_size=10)
         self.bridge = CvBridge()
         ts = message_filters.TimeSynchronizer('[self.sub_cropped, self.sub_white, self.sub_yellow], 10',queue_size=10)
