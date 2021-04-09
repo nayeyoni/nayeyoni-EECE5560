@@ -11,24 +11,19 @@ class homework8:
         self.sub_cropped =rospy.Subscriber("image_cropped", Image)
         self.sub_white = rospy.Subscriber("image_white", Image)
         self.sub_yellow = rospy.Subscriber("image_yellow", Image)
+        self.pub = rospy.Publisher("image_output", Image, queue_size=10)
         self.bridge = CvBridge()
-    
-    def callback(self, msg):
-        cv_img = self.bridge.imgmsg_to_cv2(msg, "bgr8")
-        cropped_img = cv_img[240:480, 0:640]
-        ros_output_cropped_img = self.bridge.cv2_to_imgmsg(cropped_img, "bgr8")
-        self.pub_cropped.publish(ros_output_cropped_img)
-        image_hsv = cv2.cvtColor(cropped_img,cv2.COLOR_BGR2HSV)
-        image_filtered_white = cv2.inRange(image_hsv,(0,0,0),(180,20,255))
-        image_filtered_yellow=cv2.inRange(image_hsv,(20,100,100),(35,255,255))
-        ros_output_img_yellow = self.bridge.cv2_to_imgmsg(image_filtered_yellow, "mono8")
-        ros_output_img_white = self.bridge.cv2_to_imgmsg(image_filtered_white, "mono8")
-        self.pub_white.publish(ros_output_img_white)
-        self.pub_yellow.publish(ros_output_img_yellow)
+        ts = message_filters.TimeSynchronizer('[self.sub_cropped, self.sub_white, self.sub_yellow], 10')
+        ts.registerCallback(self.callback)
+        
+    def callback(self, img_cropped, img_white, img_yellow):
+        cropped.img = self.bridge.imgmsg_to_cv2(img_cropped, "bgr8")
+        canny_edge_img = cv2.Canny(image_hsv,100, 255)
+        self.pub.publish(canny_edge_img)
         
 
 if __name__=="__main__":
     
     rospy.init_node("homework8", anonymous=True)
-    img = Image_processing()
+    img = homework8()
     rospy.spin()
