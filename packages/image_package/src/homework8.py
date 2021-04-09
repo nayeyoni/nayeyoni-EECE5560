@@ -30,7 +30,8 @@ class homework8:
     def callback3(self, msg3):
         self.msg3 = self.bridge.imgmsg_to_cv2(msg3, "mono8")
         self.mask = cv2.bitwise_or(self.msg2, self.msg3)
-        self.output = cv2.bitwise_and(self.mask,self.canny_edge_img)
+        self.canny = self.bridge.imgmsg_to_cv2(self.output_canny, "mono8")
+        self.output = cv2.bitwise_and(self.mask,self.canny)
         self.output_mask = self.bridge.cv2_to_imgmsg(self.output, "mono8")
 
 
