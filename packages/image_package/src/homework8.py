@@ -3,25 +3,28 @@
 import sys
 import rospy
 import cv2
-import message_filters
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 
 class homework8:
     def __init__(self):
-        self.sub_cropped =message_filters.Subscriber("image_cropped", Image, queue_size=10)
-        self.sub_white = message_filters.Subscriber("image_white", Image, queue_size=10)
-        self.sub_yellow = message_filters.Subscriber("image_yellow", Image, queue_size=10)
+        rospy.Subscriber("image_cropped", Image, self.callback1)
+        rospy.Subscriber("image_white", Image, self.callback2)
+        rospy.Subscriber("image_yellow", Image, self.callback3)
         self.pub = rospy.Publisher("image_output", Image, queue_size=10)
         self.bridge = CvBridge()
-        self.ts = message_filters.TimeSynchronizer('[self.sub_cropped, self.sub_white, self.sub_yellow], 10',queue_size=10)
-        self.ts.registerCallback(self.callback)
+
         
-    def callback(self, img_cropped, img_white, img_yellow):
-        cropped.img = self.bridge.imgmsg_to_cv2(img_cropped, "bgr8")
-        canny_edge_img = cv2.Canny(image_hsv,100, 255)
+    def callback1(self, msg1):
+        self.msg1 = self.bridge.imgmsg_to_cv2(msg1, "bgr8")
+        self.canny_edge_img = cv2.Canny(self.msg1,100, 255)
         self.pub.publish(canny_edge_img)
         
+    def callback2(self. msg2):
+        self.msg2 = self.bridge.imgmsg_to_cv2(msg2, "bgr8")
+        
+    def callback3(self. msg3):
+        self.msg3 = self.bridge.imgmsg_to_cv2(msg2, "bgr8")
 
 if __name__=="__main__":
     
