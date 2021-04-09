@@ -7,17 +7,19 @@ import numpy as np
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 
-class homework8:
-    def output_lines(self, original_image, lines):
-        output = np.copy(original_image)
-        if lines is not None:
-            for i in range(len(lines)):
-                l = lines[i][0]
-                cv2.line(output, (l[0],l[1]), (l[2],l[3]), (255,0,0), 2, cv2.LINE_AA)
-                cv2.circle(output, (l[0],l[1]), 2, (0,255,0))
-                cv2.circle(output, (l[2],l[3]), 2, (0,0,255))
-        return output
+def output_lines(self, original_image, lines):
+    output = np.copy(original_image)
+    if lines is not None:
+        for i in range(len(lines)):
+            l = lines[i][0]
+            cv2.line(output, (l[0],l[1]), (l[2],l[3]), (255,0,0), 2, cv2.LINE_AA)
+            cv2.circle(output, (l[0],l[1]), 2, (0,255,0))
+            cv2.circle(output, (l[2],l[3]), 2, (0,0,255))
+    return output
         
+
+class homework8:
+
     def __init__(self):
         rospy.Subscriber("image_cropped", Image, self.callback1)
         rospy.Subscriber("image_white", Image, self.callback2)
