@@ -31,7 +31,7 @@ class homework8:
         self.msg3 = self.bridge.imgmsg_to_cv2(msg3, "bgr8")
         self.msg3_hsv = cv2.cvtColor(self.msg3,cv2.COLOR_BGR2HSV)
         self.mask = cv2.bitwise_or(self.msg2_hsv, self.msg3_hsv)
-        self.output_mask = self.bridge.cv2_to_imgmsg(self.mask, "mono8")
+        self.output_mask = self.bridge.cv2_to_imgmsg(self.mask, "brg88")
         self.pub.publish(self.output_mask)
 
 if __name__=="__main__":
