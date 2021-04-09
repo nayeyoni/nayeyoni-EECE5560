@@ -8,6 +8,16 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 
 class homework8:
+    def output_lines(self, original_image, lines):
+        output = np.copy(original_image)
+        if lines is not None:
+            for i in range(len(lines)):
+                l = lines[i][0]
+                cv2.line(output, (l[0],l[1]), (l[2],l[3]), (255,0,0), 2, cv2.LINE_AA)
+                cv2.circle(output, (l[0],l[1]), 2, (0,255,0))
+                cv2.circle(output, (l[2],l[3]), 2, (0,0,255))
+        return output
+        
     def __init__(self):
         rospy.Subscriber("image_cropped", Image, self.callback1)
         rospy.Subscriber("image_white", Image, self.callback2)
@@ -24,16 +34,6 @@ class homework8:
     def callback2(self, msg2):
         self.msg2 = self.bridge.imgmsg_to_cv2(msg2, "mono8")
         
-    def output_lines(self, original_image, lines):
-        output = np.copy(original_image)
-        if lines is not None:
-            for i in range(len(lines)):
-                l = lines[i][0]
-                cv2.line(output, (l[0],l[1]), (l[2],l[3]), (255,0,0), 2, cv2.LINE_AA)
-                cv2.circle(output, (l[0],l[1]), 2, (0,255,0))
-                cv2.circle(output, (l[2],l[3]), 2, (0,0,255))
-        return output
-        
         
     def callback3(self, msg3):
         self.msg1_hsv = cv2.cvtColor(self.msg1,cv2.COLOR_BGR2HSV)
@@ -42,8 +42,8 @@ class homework8:
         self.mask = cv2.bitwise_or(self.msg2, self.msg3)
         self.output_edge = cv2.bitwise_and(self.mask, self.canny_edge_img)
         self.white_lines = cv2.HoughLinesP(self.output_edge, rho = 1, theta = 1*np.pi/180, threshold = 100, minLineLength = 1, maxLineGap = 10)
-        output_lines(self, self.msg2, self.white_lines)
-        self.output_mask = self.bridge.cv2_to_imgmsg(self.white_lines, "mono8")
+        self.output_white_lines = output_lines(self, self.msg2, self.white_lines)
+        self.output_mask = self.bridge.cv2_to_imgmsg(self.output_white_lines, "mono8")
         self.pub.publish(self.output_mask)
 
 
