@@ -1,0 +1,9 @@
+launch>
+<include file="$(find image_package)/launch/homework7.launch"/>
+
+  
+    <node pkg="image_package" name="homework8" type="homework8.py"/>
+ 
+
+  
+</launch>
