@@ -20,7 +20,7 @@ class Image_processing:
         ros_output_cropped_img = self.bridge.cv2_to_imgmsg(cropped_img, "bgr8")
         self.pub_cropped.publish(ros_output_cropped_img)
         image_hsv = cv2.cvtColor(cropped_img,cv2.COLOR_BGR2HSV)
-        image_filtered_white = cv2.inRange(image_hsv,(0,0,0),(180,30,255))
+        image_filtered_white = cv2.inRange(image_hsv,(0,0,0),(180,40,255))
         image_filtered_yellow=cv2.inRange(image_hsv,(20,100,100),(35,255,255))
         ros_output_img_yellow = self.bridge.cv2_to_imgmsg(image_filtered_yellow, "mono8")
         ros_output_img_white = self.bridge.cv2_to_imgmsg(image_filtered_white, "mono8")
