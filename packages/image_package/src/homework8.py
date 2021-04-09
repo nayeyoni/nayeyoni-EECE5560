@@ -45,7 +45,7 @@ class homework8:
         self.output_edge = cv2.bitwise_and(self.mask, self.canny_edge_img)
         self.white_lines = cv2.HoughLinesP(self.output_edge, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
         self.output_white_lines = output_lines(self, self.msg1, self.white_lines)
-        self.output_mask = self.bridge.cv2_to_imgmsg(self.output_white_lines, "mono8")
+        self.output_mask = self.bridge.cv2_to_imgmsg(self.output_white_lines, "brg8")
         self.pub.publish(self.output_mask)
 
 
