@@ -29,7 +29,7 @@ class homework8:
         self.canny_edge_img = cv2.Canny(self.msg1_hsv,50, 255)
         self.msg3 = self.bridge.imgmsg_to_cv2(msg3, "mono8")
         self.mask = cv2.bitwise_or(self.msg2, self.msg3)
-        self.output_edge = cv2.bitwise_and(self.mask, self.canny_edge_img)
+        self.output_edge = cv2.bitwise_and(self.mask, self.msg2)
         self.output_mask = self.bridge.cv2_to_imgmsg(self.output_edge, "mono8")
         self.pub.publish(self.output_mask)
 
