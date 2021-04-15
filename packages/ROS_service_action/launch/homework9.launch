@@ -1,0 +1,7 @@
+<launch>
+<include file="$(find example_service)/launch/fibonacci.launch"/>
+<include file="$(find example_action_server)/launch/fibonacci.launch"/>
+
+  <node pkg="ROS_service_action" name="homework9" type="homework9.py"/>
+ 
+</launch>
