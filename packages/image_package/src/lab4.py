@@ -8,10 +8,21 @@ from sensor_msgs.msg import Image
 from duckietown_msgs.msg import SegmentList, Segment
 from cv_bridge import CvBridge
 
+def output_lines(self, original_image, lines):
+    output = np.copy(original_image)
+    if lines is not None:
+        for i in range(len(lines)):
+            l = lines[i][0]
+            cv2.line(output, (l[0],l[1]), (l[2],l[3]), (255,0,0), 2, cv2.LINE_AA)
+            cv2.circle(output, (l[0],l[1]), 2, (0,255,0))
+            cv2.circle(output, (l[2],l[3]), 2, (0,0,255))
+    return output
+
 class lab4:
     def __init__(self):
         rospy.Subscriber("camera_node/image/compressed", CompressedImage, self.lanefilter_cb, queue_size=1, buff_size=2**24)
         self.pub1 = rospy.Publisher("/nayebot/line_detector_node/segment_list", SegmentList, queue_size=1, buff_size=2**24)
+        self.pub2 = rospy.Publisher("lab4_lines", Image, queue_size=10)
         self.bridge = CvBridge()
     
     def lanefilter_cb(self, msg):
@@ -37,15 +48,9 @@ class lab4:
         arr_ratio = np.array([1. / img_size[0], 1. / img_size[1], 1. / img_size[0], 1. / img_size[1]])
         line_normalized = (edge_lines + arr_cutoff) * arr_ratio
         self.pub1.publish(line_normalized)
-        
-        self.output_white_lines = output_lines(self, self.msg1, self.white_lines)
-        self.output_white = self.bridge.cv2_to_imgmsg(self.output_white_lines, "bgr8")
-        self.pub_white.publish(self.output_white)
-        self.yellow_edge = cv2.bitwise_and (self.msg3, self.canny_edge_img)
-        self.yellow_lines = cv2.HoughLinesP(self.yellow_edge, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
-        self.output_yellow_lines = output_lines(self, self.msg1, self.yellow_lines)
-        self.output_yellow = self.bridge.cv2_to_imgmsg(self.output_yellow_lines, "bgr8")
-        self.pub_yellow.publish(self.output_yellow)
+        self.output_lines = output_lines(self, cv_img, edge_lines)
+        self.output = self.bridge.cv2_to_imgmsg(self.output_yellow_lines, "bgr8")
+        self.pub2.publish(self.output)
 
 if __name__=="__main__":
     
