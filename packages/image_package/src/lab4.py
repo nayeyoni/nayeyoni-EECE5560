@@ -51,8 +51,8 @@ class lab4:
         arr_ratio = np.array([1. / img_size[0], 1. / img_size[1], 1. / img_size[0], 1. / img_size[1]])
         line_normalized = (edge_lines + arr_cutoff) * arr_ratio
         self.pub_msg.segments = 'red'
-        self.pub_msg.segments.pixels_normalized.x = line_normalized[0]
-        self.pub_msg.segments.pixels_normalized.y = line_normalized[1]
+        self.pub_msg.segments.pixels_normalized[0].x = line_normalized
+        self.pub_msg.segments.pixels_normalized[1].y = line_normalized
         self.pub1.publish(self.pub_msg)
         self.output_lines = output_lines(self, cv_img, edge_lines)
         self.output = self.bridge.cv2_to_imgmsg(self.output_yellow_lines, "bgr8")
