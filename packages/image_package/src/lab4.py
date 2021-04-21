@@ -63,8 +63,7 @@ class lab4:
             seg.pixels_normalized[1].x = x1 
             seg.pixels_normalized[1].y = y1
             
-            pub_msg.append(seg)
-        
+            pub_msg.segments.append(seg)
         self.pub1.publish(pub_msg)
 
                  
