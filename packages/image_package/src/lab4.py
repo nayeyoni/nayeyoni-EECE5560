@@ -50,7 +50,7 @@ class lab4:
         arr_cutoff = np.array([0, offset, 0, offset])
         arr_ratio = np.array([1. / img_size[0], 1. / img_size[1], 1. / img_size[0], 1. / img_size[1]])
         line_normalized = (edge_lines + arr_cutoff) * arr_ratio
-        self.pub_msg.segments = 2
+        self.pub_msg.segments = 'red'
         self.pub_msg.segments.pixels_normalized.x = line_normalized[0]
         self.pub_msg.segments.pixels_normalized.y = line_normalized[1]
         self.pub1.publish(self.pub_msg)
