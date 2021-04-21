@@ -51,6 +51,13 @@ class lab4:
         edge_yellow = cv2.bitwise_and(image_filtered_yellow, canny_edge_img)
         edge_whitelines = cv2.HoughLinesP(edge_white, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
         edge_yellowlines = cv2.HoughLinesP(edge_yellow, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
+        ros_output_img_yellow = self.bridge.cv2_to_imgmsg(image_filtered_yellow, "mono8")
+        ros_output_img_white = self.bridge.cv2_to_imgmsg(image_filtered_white, "mono8")
+        ros_output_canny = self.bridge.cv2_to_imgmsg(canny_edge_img, "mono8")
+        self.pub_white.publish(ros_output_img_white)
+        self.pub_yellow.publish(ros_output_img_yellow)
+        self.pub_canny.publish(ros_output_canny)
+                 
         arr_cutoff = np.array([0, offset, 0, offset])
         arr_ratio = np.array([1. / img_size[0], 1. / img_size[1], 1. / img_size[0], 1. / img_size[1]])
         whiteline_normalized = (edge_whitelines + arr_cutoff) * arr_ratio
@@ -84,13 +91,7 @@ class lab4:
             pub_msg.segments.append(seg2)
         self.pub1.publish(pub_msg)
 
-        ros_output_img_yellow = self.bridge.cv2_to_imgmsg(image_filtered_yellow, "mono8")
-        ros_output_img_white = self.bridge.cv2_to_imgmsg(image_filtered_white, "mono8")
-        ros_output_canny = self.bridge.cv2_to_imgmsg(canny_edge_img, "mono8")
-        self.pub_white.publish(ros_output_img_white)
-        self.pub_yellow.publish(ros_output_img_yellow)
-        self.pub_canny.publish(ros_output_canny)
-                 
+        
 
 if __name__=="__main__":
     
