@@ -24,7 +24,6 @@ class lab4:
         self.pub1 = rospy.Publisher("/nayebot/line_detector_node/segment_list", SegmentList, queue_size=10)
         self.pub2 = rospy.Publisher("lab4_lines", Image, queue_size=10)
         self.pub_msg = SegmentList()
-        self.pub_msg.header = std_msgs.msg.Header()
         self.bridge = CvBridge()
     
     def lanefilter_cb(self, msg):
