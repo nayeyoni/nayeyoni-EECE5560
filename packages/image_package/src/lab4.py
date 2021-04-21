@@ -51,7 +51,7 @@ class lab4:
         edge_whitelines = cv2.HoughLinesP(edge_white, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
         edge_yellowlines = cv2.HoughLinesP(edge_yellow, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
         arr_cutoff = np.array([0, offset, 0, offset])
-        arr_ratio = np.array([1. / img_size[0], 1. / img_size[1], 1. / img_size[0], 1. / img_size[1]])
+        arr_ratio = np.array([1. / img_size[1], 1. / img_size[0], 1. / img_size[1], 1. / img_size[0]])
         whiteline_normalized = (edge_whitelines + arr_cutoff) * arr_ratio
         yellowline_normalized = (edge_yellowlines + arr_cutoff) * arr_ratio
         white_list_normalized = [list(itertools.chain(*sub)) for sub in whiteline_normalized]
