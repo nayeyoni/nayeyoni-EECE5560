@@ -27,7 +27,10 @@ class lab4:
         self.pub1 = rospy.Publisher("/nayebot/line_detector_node/segment_list", SegmentList, queue_size=10)
         self.pub2 = rospy.Publisher("lab4_lines", Image, queue_size=10)
         self.bridge = CvBridge()
-    
+        self.pub_white = rospy.Publisher("image_white", Image, queue_size=10)
+        self.pub_yellow = rospy.Publisher("image_yellow", Image, queue_size=10)   
+        self.pub_canny = rospy.Publisher("canny", Image, queue_size=10)   
+
     def lanefilter_cb(self, msg):
         rospy.logwarn("NAYE'S NODE")
         cv_img = self.bridge.compressed_imgmsg_to_cv2(msg, "bgr8")
@@ -35,8 +38,6 @@ class lab4:
         offset = 40
         new_image = cv2.resize(cv_img, img_size, interpolation=cv2.INTER_NEAREST)
         cropped_img = new_image[offset:, :]
-        
-        
         
         
         image_hsv = cv2.cvtColor(cropped_img,cv2.COLOR_BGR2HSV)
@@ -51,7 +52,7 @@ class lab4:
         edge_whitelines = cv2.HoughLinesP(edge_white, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
         edge_yellowlines = cv2.HoughLinesP(edge_yellow, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
         arr_cutoff = np.array([0, offset, 0, offset])
-        arr_ratio = np.array([1. / img_size[1], 1. / img_size[0], 1. / img_size[1], 1. / img_size[0]])
+        arr_ratio = np.array([1. / img_size[0], 1. / img_size[1], 1. / img_size[0], 1. / img_size[1]])
         whiteline_normalized = (edge_whitelines + arr_cutoff) * arr_ratio
         yellowline_normalized = (edge_yellowlines + arr_cutoff) * arr_ratio
         white_list_normalized = [list(itertools.chain(*sub)) for sub in whiteline_normalized]
@@ -83,6 +84,12 @@ class lab4:
             pub_msg.segments.append(seg2)
         self.pub1.publish(pub_msg)
 
+        ros_output_img_yellow = self.bridge.cv2_to_imgmsg(image_filtered_yellow, "mono8")
+        ros_output_img_white = self.bridge.cv2_to_imgmsg(image_filtered_white, "mono8")
+        ros_output_canny = self.bridge.cv2_to_imgmsg(canny_edge_img, "mono8")
+        self.pub_white.publish(ros_output_img_white)
+        self.pub_yellow.publish(ros_output_img_yellow)
+        self.pub_canny.publish(ros_output_canny)
                  
 
 if __name__=="__main__":
