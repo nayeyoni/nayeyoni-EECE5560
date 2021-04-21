@@ -52,7 +52,7 @@ class lab4:
         arr_ratio = np.array([1. / img_size[0], 1. / img_size[1], 1. / img_size[0], 1. / img_size[1]])
         line_normalized = (edge_lines + arr_cutoff) * arr_ratio
         self.output_lines = output_lines(self, cv_img, edge_lines)
-        self.output = self.bridge.cv2_to_imgmsg(self.output_yellow_lines, "bgr8")
+        self.output = self.bridge.cv2_to_imgmsg(self.output_lines, "bgr8")
         self.pub2.publish(self.output)
         
         for x0,y0,x1,y1 in line_normalized:
@@ -70,6 +70,6 @@ class lab4:
 
 if __name__=="__main__":
     
-    rospy.init_node("homework7", anonymous=True)
+    rospy.init_node("lab4", anonymous=True)
     img = lab4()
     rospy.spin()
