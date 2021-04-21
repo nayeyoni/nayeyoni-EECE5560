@@ -29,6 +29,7 @@ class lab4:
         self.bridge = CvBridge()
     
     def lanefilter_cb(self, msg):
+        rospy.logwarn("NAYE'S NODE")
         cv_img = self.bridge.compressed_imgmsg_to_cv2(msg, "bgr8")
         img_size = (160, 120)
         offset = 40
@@ -45,25 +46,41 @@ class lab4:
         
         canny_edge_img = cv2.Canny(cropped_img,150, 255)
         mask = cv2.bitwise_or(image_filtered_white, image_filtered_yellow)
-        edge = cv2.bitwise_and(mask, canny_edge_img)
-        edge_lines = cv2.HoughLinesP(edge, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
+        edge_white = cv2.bitwise_and(image_filtered_white, canny_edge_img)
+        edge_yellow = cv2.bitwise_and(image_filtered_yellow, canny_edge_img)
+        edge_whitelines = cv2.HoughLinesP(edge_white, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
+        edge_yellowlines = cv2.HoughLinesP(edge_yellow, rho = 1, theta = 1*np.pi/180, threshold = 1, minLineLength = 1, maxLineGap = 10)
         arr_cutoff = np.array([0, offset, 0, offset])
         arr_ratio = np.array([1. / img_size[0], 1. / img_size[1], 1. / img_size[0], 1. / img_size[1]])
-        line_normalized = (edge_lines + arr_cutoff) * arr_ratio
-        list_line_normalized = [list(itertools.chain(*sub)) for sub in line_normalized]
-        self.output_lines = output_lines(self, cv_img, edge_lines)
-        self.output = self.bridge.cv2_to_imgmsg(self.output_lines, "bgr8")
+        whiteline_normalized = (edge_whitelines + arr_cutoff) * arr_ratio
+        yellowline_normalized = (edge_yellowlines + arr_cutoff) * arr_ratio
+        white_list_normalized = [list(itertools.chain(*sub)) for sub in whiteline_normalized]
+        yellow_list_normalized = [list(itertools.chain(*sub)) for sub in yellowline_normalized]
+        self.output_lines1 = output_lines(self, cv_img, edge_whitelines)
+        self.output_lines2 = output_lines(self, self.output_lines1, edge_yellowlines)
+        self.output = self.bridge.cv2_to_imgmsg(self.output_lines2, "bgr8")
         self.pub2.publish(self.output)
+
         pub_msg = SegmentList()
-        seg = Segment()
-        for x0,y0,x1,y1 in list_line_normalized:
-            seg.color = Segment.RED
-            seg.pixels_normalized[0].x = x0 
-            seg.pixels_normalized[0].y = y0
-            seg.pixels_normalized[1].x = x1 
-            seg.pixels_normalized[1].y = y1
+        seg1 = Segment()
+        seg2 = Segment()
+        for x0,y0,x1,y1 in white_list_normalized:
+            seg1.color = Segment.RED
+            seg1.pixels_normalized[0].x = x0 
+            seg1.pixels_normalized[0].y = y0
+            seg1.pixels_normalized[1].x = x1 
+            seg1.pixels_normalized[1].y = y1
             
-            pub_msg.segments.append(seg)
+            pub_msg.segments.append(seg1)
+
+        for x0,y0,x1,y1 in yellow_list_normalized:
+            seg2.color = Segment.RED
+            seg2.pixels_normalized[0].x = x0 
+            seg2.pixels_normalized[0].y = y0
+            seg2.pixels_normalized[1].x = x1 
+            seg2.pixels_normalized[1].y = y1
+            
+            pub_msg.segments.append(seg2)
         self.pub1.publish(pub_msg)
 
                  
