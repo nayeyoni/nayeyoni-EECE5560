@@ -21,7 +21,7 @@ def output_lines(self, original_image, lines):
 class lab4:
     def __init__(self):
         rospy.Subscriber("camera_node/image/compressed", CompressedImage, self.lanefilter_cb, queue_size=1, buff_size=2**24)
-        self.pub1 = rospy.Publisher("/nayebot/line_detector_node/segment_list", SegmentList, queue_size=1, buff_size=2**24)
+        self.pub1 = rospy.Publisher("/nayebot/line_detector_node/segment_list", SegmentList, queue_size=10)
         self.pub2 = rospy.Publisher("lab4_lines", Image, queue_size=10)
         self.bridge = CvBridge()
     
