@@ -51,11 +51,12 @@ class lab4:
         arr_cutoff = np.array([0, offset, 0, offset])
         arr_ratio = np.array([1. / img_size[0], 1. / img_size[1], 1. / img_size[0], 1. / img_size[1]])
         line_normalized = (edge_lines + arr_cutoff) * arr_ratio
+        list_line_normalized = [list(itertools.chain(*sub)) for sub in line_normalized]
         self.output_lines = output_lines(self, cv_img, edge_lines)
         self.output = self.bridge.cv2_to_imgmsg(self.output_lines, "bgr8")
         self.pub2.publish(self.output)
         
-        for x0,y0,x1,y1 in line_normalized:
+        for x0,y0,x1,y1 in list_line_normalized:
             self.seg.color = Segment.RED
             self.seg.pixels_normalized[0].x = x0 
             self.seg.pixels_normalized[0].y = y0
