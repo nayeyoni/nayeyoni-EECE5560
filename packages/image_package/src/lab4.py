@@ -55,5 +55,5 @@ class lab4:
 if __name__=="__main__":
     
     rospy.init_node("homework7", anonymous=True)
-    img = Image_processing()
+    img = lab4()
     rospy.spin()
