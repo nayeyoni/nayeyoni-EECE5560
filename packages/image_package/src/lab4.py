@@ -5,6 +5,7 @@ import rospy
 import std_msgs.msg
 import cv2
 import numpy as np
+import itertools
 from sensor_msgs.msg import Image, CompressedImage
 from duckietown_msgs.msg import SegmentList, Segment
 from cv_bridge import CvBridge
