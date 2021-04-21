@@ -19,13 +19,14 @@ def output_lines(self, original_image, lines):
             cv2.circle(output, (l[2],l[3]), 2, (0,0,255))
     return output
 
+
 class lab4:
     def __init__(self):
         rospy.Subscriber("camera_node/image/compressed", CompressedImage, self.lanefilter_cb, queue_size=1, buff_size=2**24)
         self.pub1 = rospy.Publisher("/nayebot/line_detector_node/segment_list", SegmentList, queue_size=10)
         self.pub2 = rospy.Publisher("lab4_lines", Image, queue_size=10)
         self.pub_msg = SegmentList()
-        self.pub_msg.header = std_msgs.msg.Header()
+        self.seg = Segment()
         self.bridge = CvBridge()
     
     def lanefilter_cb(self, msg):
@@ -50,13 +51,22 @@ class lab4:
         arr_cutoff = np.array([0, offset, 0, offset])
         arr_ratio = np.array([1. / img_size[0], 1. / img_size[1], 1. / img_size[0], 1. / img_size[1]])
         line_normalized = (edge_lines + arr_cutoff) * arr_ratio
-        self.pub_msg.segments = 'red'
-        self.pub_msg.segments.pixels_normalized[0].x = line_normalized
-        self.pub_msg.segments.pixels_normalized[1].y = line_normalized
-        self.pub1.publish(self.pub_msg)
         self.output_lines = output_lines(self, cv_img, edge_lines)
         self.output = self.bridge.cv2_to_imgmsg(self.output_yellow_lines, "bgr8")
         self.pub2.publish(self.output)
+        
+        for x0,y0,x1,y1 in line_normalized:
+            self.seg.color = Segment.RED
+            self.seg.pixels_normalized[0].x = x0 
+            self.seg.pixels_normalized[0].y = y0
+            self.seg.pixels_normalized[1].x = x1 
+            self.seg.pixels_normalized[1].y = y1
+            
+            self.pub_msg.append(self.seg)
+
+        self.pub1.publish(self.output)
+
+                 
 
 if __name__=="__main__":
     
