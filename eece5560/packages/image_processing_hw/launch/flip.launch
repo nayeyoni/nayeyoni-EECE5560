@@ -1,9 +1,0 @@
-<launch>
-
-
-  
-    <node pkg="image_processing_hw" name="flip_image" type="flip_image.py"/>
- 
-
-  
-</launch>
