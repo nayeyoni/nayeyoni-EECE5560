@@ -28,7 +28,8 @@ def segment_function(self, normalized_lines):
         seg.pixels_normalized[0].x = x0 
         seg.pixels_normalized[0].y = y0
         seg.pixels_normalized[1].x = x1 
-        seg.pixels_normalized[1].y = y1        
+        seg.pixels_normalized[1].y = y1
+        
         seg_list.append(seg)
     return seg_list
 
@@ -68,22 +69,23 @@ class lab4:
         self.pub_white.publish(ros_output_img_white)
         self.pub_yellow.publish(ros_output_img_yellow)
         self.pub_canny.publish(ros_output_canny)
-                 
-        arr_cutoff = np.array([0, offset, 0, offset])
-        arr_ratio = np.array([1. / img_size[0], 1. / img_size[1], 1. / img_size[0], 1. / img_size[1]])
-        whiteline_normalized = (edge_whitelines + arr_cutoff) * arr_ratio
-        yellowline_normalized = (edge_yellowlines + arr_cutoff) * arr_ratio
-        white_list_normalized = [list(itertools.chain(*sub)) for sub in whiteline_normalized]
-        yellow_list_normalized = [list(itertools.chain(*sub)) for sub in yellowline_normalized]
-        self.output_lines1 = output_lines(self, cv_img, edge_whitelines)
-        self.output_lines2 = output_lines(self, self.output_lines1, edge_yellowlines)
-        self.output = self.bridge.cv2_to_imgmsg(self.output_lines2, "bgr8")
-        self.pub2.publish(self.output)
+        
+        if (edge_whitelines is not None) and (edge_yellowlines is not None): 
+            arr_cutoff = np.array([0, offset, 0, offset])
+            arr_ratio = np.array([1. / img_size[0], 1. / img_size[1], 1. / img_size[0], 1. / img_size[1]])
+            whiteline_normalized = (edge_whitelines + arr_cutoff) * arr_ratio
+            yellowline_normalized = (edge_yellowlines + arr_cutoff) * arr_ratio
+            white_list_normalized = [list(itertools.chain(*sub)) for sub in whiteline_normalized]
+            yellow_list_normalized = [list(itertools.chain(*sub)) for sub in yellowline_normalized]
+            self.output_lines1 = output_lines(self, cv_img, edge_whitelines)
+            self.output_lines2 = output_lines(self, self.output_lines1, edge_yellowlines)
+            self.output = self.bridge.cv2_to_imgmsg(self.output_lines2, "bgr8")
+            self.pub2.publish(self.output)
 
-        pub_msg = SegmentList()
-        pub_msg.segments.extend(segment_function(self, white_list_normalized))
-        pub_msg.segments.extend(segment_function(self, yellow_list_normalized))
-        self.pub1.publish(pub_msg)
+            pub_msg = SegmentList()
+            pub_msg.segments.extend(segment_function(self, white_list_normalized))
+            pub_msg.segments.extend(segment_function(self, yellow_list_normalized))
+            self.pub1.publish(pub_msg)
 
 
 
