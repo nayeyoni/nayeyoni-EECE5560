@@ -88,7 +88,6 @@ class lab4:
         return seg_list
 
 
-        
 
 if __name__=="__main__":
     
