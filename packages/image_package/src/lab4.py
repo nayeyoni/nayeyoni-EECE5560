@@ -20,6 +20,17 @@ def output_lines(self, original_image, lines):
             cv2.circle(output, (l[2],l[3]), 2, (0,0,255))
     return output
 
+def segment_function(self, normalized_lines):
+    seg_list = []
+    for x0,y0,x1,y1 in normalized_lines:
+        seg = Segment()
+        seg.color = Segment.RED
+        seg.pixels_normalized[0].x = x0 
+        seg.pixels_normalized[0].y = y0
+        seg.pixels_normalized[1].x = x1 
+        seg.pixels_normalized[1].y = y1        
+        seg_list.append(seg)
+    return seg_list
 
 class lab4:
     def __init__(self):
@@ -73,19 +84,6 @@ class lab4:
         pub_msg.segments.extend(segment_function(self, white_list_normalized))
         pub_msg.segments.extend(segment_function(self, yellow_list_normalized))
         self.pub1.publish(pub_msg)
-
-    def segment_function(self, normalized_lines):
-        seg_list = []
-        for x0,y0,x1,y1 in normalized_lines:
-            seg = Segment()
-            seg.color = Segment.RED
-            seg.pixels_normalized[0].x = x0 
-            seg.pixels_normalized[0].y = y0
-            seg.pixels_normalized[1].x = x1 
-            seg.pixels_normalized[1].y = y1
-            
-            seg_list.append(seg)
-        return seg_list
 
 
 
