@@ -72,7 +72,7 @@ class lab4:
         
         if (edge_whitelines is not None) and (edge_yellowlines is not None): 
             arr_cutoff = np.array([0, offset, 0, offset])
-            arr_ratio = np.array([1. / img_size[0], 1. / img_size[1], 1. / img_size[0], 1. / img_size[1]])
+            arr_ratio = np.array([1. / img_size[1], 1. / img_size[0], 1. / img_size[1], 1. / img_size[0]])
             whiteline_normalized = (edge_whitelines + arr_cutoff) * arr_ratio
             yellowline_normalized = (edge_yellowlines + arr_cutoff) * arr_ratio
             white_list_normalized = [list(itertools.chain(*sub)) for sub in whiteline_normalized]
