@@ -70,26 +70,23 @@ class lab4:
         self.pub2.publish(self.output)
 
         pub_msg = SegmentList()
-        seg1 = Segment()
-        seg2 = Segment()
-        for x0,y0,x1,y1 in white_list_normalized:
-            seg1.color = Segment.RED
-            seg1.pixels_normalized[0].x = x0 
-            seg1.pixels_normalized[0].y = y0
-            seg1.pixels_normalized[1].x = x1 
-            seg1.pixels_normalized[1].y = y1
-            
-            pub_msg.segments.append(seg1)
-
-        for x0,y0,x1,y1 in yellow_list_normalized:
-            seg2.color = Segment.RED
-            seg2.pixels_normalized[0].x = x0 
-            seg2.pixels_normalized[0].y = y0
-            seg2.pixels_normalized[1].x = x1 
-            seg2.pixels_normalized[1].y = y1
-            
-            pub_msg.segments.append(seg2)
+        pub_msg.segments.extend(segment_function(self, white_list_normalized))
+        pub_msg.segments.extend(segment_function(self, yellow_list_normalized))
         self.pub1.publish(pub_msg)
+
+    def segment_function(self, normalized_lines):
+        seg_list = []
+        for x0,y0,x1,y1 in normalized_lines:
+            seg = Segment()
+            seg.color = Segment.RED
+            seg.pixels_normalized[0].x = x0 
+            seg.pixels_normalized[0].y = y0
+            seg.pixels_normalized[1].x = x1 
+            seg.pixels_normalized[1].y = y1
+            
+            seg_list.append(seg)
+        return seg_list
+
 
         
 
