@@ -77,7 +77,7 @@ class lab4:
             yellowline_normalized = (edge_yellowlines + arr_cutoff) * arr_ratio
             white_list_normalized = [list(itertools.chain(*sub)) for sub in whiteline_normalized]
             yellow_list_normalized = [list(itertools.chain(*sub)) for sub in yellowline_normalized]
-            self.output_lines1 = output_lines(self, cv_img, edge_whitelines)
+            self.output_lines1 = output_lines(self, cropped_img, edge_whitelines)
             self.output_lines2 = output_lines(self, self.output_lines1, edge_yellowlines)
             self.output = self.bridge.cv2_to_imgmsg(self.output_lines2, "bgr8")
             self.pub2.publish(self.output)
