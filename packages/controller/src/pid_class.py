@@ -4,10 +4,7 @@ import time
 from std_msgs.msg import Float32
 
 class pid_class:
-    def __init__(self, Kp, Ki, Kd, initial_time = None):
-        if initial_time is None:
-            initial_time = time.time()
-
+    def __init__(self, Kp, Ki, Kd):
         self.Kp = Kp
         self.Ki = Ki
         self.Kd = Kd
@@ -15,10 +12,7 @@ class pid_class:
         self.derivative = 0
         self.integral = 0
  
-    def update(self, error, dt, current_time =None):
-        if current_time is None:
-            current_time = time.time()
-        dt = current_time - initial_time
+    def update(self, error, dt):
         de = error - self.prev_error
         self.derivative = de / dt
         self.integral += error * dt
