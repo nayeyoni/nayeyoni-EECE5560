@@ -1,5 +1,5 @@
 <launch>
-<include file="$(find controls_hw)/launch/start_dynamics.launch"/>
+
 
   <group ns="ros">
 
