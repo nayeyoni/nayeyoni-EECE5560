@@ -8,7 +8,7 @@ class pid_class:
         self.Kp = Kp
         self.Ki = Ki
         self.Kd = Kd
-        self.prev_error = 0
+        self.prev_error = 0.0
         self.derivative = 0
         self.integral = 0
  
