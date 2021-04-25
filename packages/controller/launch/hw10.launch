@@ -1,10 +1,8 @@
 <launch>
 <include file="$(find controls_hw)/launch/start_dynamics.launch"/>
 
-  <group ns="ros">
 
     <node pkg="controller" name="pid_controller" type="pid_controller.py"/>
     <node pkg="controller" name="pid_class" type="pid_class.py"/>
-  </group>
   
 </launch>
