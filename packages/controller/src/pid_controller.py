@@ -16,6 +16,4 @@ class pid_controller:
         self.pub1.publish(acc)
 
 if __name__ == '__main__':
-    rospy.init_node('pid_controller', anonymous=True)
-    pid_controller()
-    rospy.spin()
+   
