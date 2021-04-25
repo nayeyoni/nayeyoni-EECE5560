@@ -25,10 +25,4 @@ class pid_class:
         control = (self.Kp * error) + (self.Ki * self.integral) + (self.Kd * self.derivative)
         self.prev_error = error
         return control
-
-if __name__ == '__main__':
-    rospy.init_node('pid_class')
-    pid_class()
-    rospy.spin()
-    
     
