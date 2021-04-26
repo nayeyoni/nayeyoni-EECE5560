@@ -13,7 +13,7 @@ class pid_controller:
         
     def callback(self, error):
         print(error)
-        acc = self.p.update(float(error), 0.1)
+        acc = self.p.update(error, 0.1)
         self.pub1.publish(acc)
 
 if __name__ == '__main__':
