@@ -20,8 +20,5 @@ class pid_class:
         self.prev_error = error
         return control
     
-    def controllers(self, Kp, Ki, Kd):
-        self.Kp = Kp
-        self.Ki = Ki
-        self.Kd = Kd
+
     
