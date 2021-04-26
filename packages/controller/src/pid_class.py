@@ -13,7 +13,7 @@ class pid_class:
         self.integral = 0.0
  
     def update(self, error, dt):
-        de = error-Float32(self.prev_error)
+        de = error-self.prev_error
         self.derivative = de / dt
         self.integral += error * dt
         control = (self.Kp * error) + (self.Ki * self.integral) + (self.Kd * self.derivative)
