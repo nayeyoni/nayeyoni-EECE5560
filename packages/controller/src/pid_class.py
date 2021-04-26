@@ -13,10 +13,15 @@ class pid_class:
         self.integral = 0
  
     def update(self, error, dt):
-        de = float(error) - self.prev_error
+        de = error - self.prev_error
         self.derivative = de / dt
         self.integral += error * dt
         control = (self.Kp * error) + (self.Ki * self.integral) + (self.Kd * self.derivative)
         self.prev_error = error
         return control
+    
+    def controllers(self, Kp, Ki, Kd):
+        self.Kp = Kp
+        self.Ki = Ki
+        self.Kd = Kd
     
