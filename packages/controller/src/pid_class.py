@@ -9,12 +9,11 @@ class pid_class:
         self.Ki = Ki
         self.Kd = Kd
         self.prev_error = 0.0
-        self.derivative = 0
-        self.integral = 0
+        self.derivative = 0.0
+        self.integral = 0.0
  
     def update(self, error, dt):
-        de = error - self.prev_error
-        self.derivative = de / dt
+        self.derivative = (error - self.prev_error) / dt
         self.integral += error * dt
         control = (self.Kp * error) + (self.Ki * self.integral) + (self.Kd * self.derivative)
         self.prev_error = error
