@@ -7,7 +7,7 @@ from std_msgs.msg import Float32
 class pid_controller:
     def __init__(self):
         rospy.set_param("controller_ready", "true")
-        self.p = pid_class(Kp = 15, Ki = 0, Kd = 0)  
+        self.p = pid_class(Kp = 1, Ki = 0, Kd = 0)  
         self.pub1 = rospy.Publisher("/control_input", Float32, queue_size=10)
         rospy.Subscriber("/error", Float32, self.callback)
         
