@@ -8,12 +8,12 @@ class pid_class:
         self.Kp = Kp
         self.Ki = Ki
         self.Kd = Kd
-        self.prev_error = Float32(0)
+        self.prev_error = 0.0
         self.derivative = 0
         self.integral = 0
  
     def update(self, error, dt):
-        de = error - self.prev_error
+        de = float(error) - self.prev_error
         self.derivative = de / dt
         self.integral += error * dt
         control = (self.Kp * error) + (self.Ki * self.integral) + (self.Kd * self.derivative)
