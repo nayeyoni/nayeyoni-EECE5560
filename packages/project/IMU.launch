@@ -1,9 +1,0 @@
-<launch>
-
-  <group ns="$(env VEHICLE_NAME)"> 
-
-    <node pkg="project" name="IMU" type="IMU.py"/>
-
-  </group>
-
-</launch>
