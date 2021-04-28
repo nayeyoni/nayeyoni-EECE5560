@@ -12,6 +12,7 @@ class pid_controller:
         rospy.Subscriber("/error", Float32, self.callback)
         
     def callback(self, error):
+    
         acc = self.p.update(error.data, 0.1)
         self.pub1.publish(acc)
 
