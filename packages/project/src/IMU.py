@@ -7,7 +7,7 @@ import os
 import sys
 import rospy
 import std_msgs.msg
-from sensor_msgs.msg import IMU
+from sensor_msgs.msg import Imu
 
 self.pub = rospy.Publisher("IMU_data", IMU, queue_size=10)
 self.data = IMU()
