@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 import time
 import math
 import IMU
@@ -256,17 +256,17 @@ while True:
     ##################### END Tilt Compensation ########################
 
 
-self.data.orientation.x = 0
-self.data.orientation.y = 0
-self.data.orientation.z = 0
- self.data.orientation.w = 0
-self.data.angular_velocity.x = gyroXangle
-self.data.angular_velocity.y = gyroYangle
-self.data.angular_velocity.z = gyroZangle
-self.data.linear_acceleration.x = AccXangle
-self.data.linear_acceleration.y = AccYangle
-self.data.linear_acceleration.z = 0
-self.pub.publish(self.data)
+    self.data.orientation.x = 0
+    self.data.orientation.y = 0
+    self.data.orientation.z = 0
+    self.data.orientation.w = 0
+    self.data.angular_velocity.x = gyroXangle
+    self.data.angular_velocity.y = gyroYangle
+    self.data.angular_velocity.z = gyroZangle
+    self.data.linear_acceleration.x = AccXangle
+    self.data.linear_acceleration.y = AccYangle
+    self.data.linear_acceleration.z = 0
+    self.pub.publish(self.data)
 
 
     #slow program down a bit, makes the output more readable
