@@ -9,8 +9,8 @@ import rospy
 import std_msgs.msg
 from sensor_msgs.msg import Imu
 
-self.pub = rospy.Publisher("IMU_data", IMU, queue_size=10)
-self.data = IMU()
+self.pub = rospy.Publisher("IMU_data", Imu, queue_size=10)
+self.data = Imu()
 self.data.header = std_msgs.msg.Header()
 self.data.header.stamp = rospy.Time.now()
 
@@ -260,12 +260,15 @@ while True:
     self.data.orientation.y = 0
     self.data.orientation.z = 0
     self.data.orientation.w = 0
+    self.data.orientation_covariance = [0.] * 9
     self.data.angular_velocity.x = gyroXangle
     self.data.angular_velocity.y = gyroYangle
     self.data.angular_velocity.z = gyroZangle
+    self.data.angular_velocity_covariance = [0.] * 9
     self.data.linear_acceleration.x = AccXangle
     self.data.linear_acceleration.y = AccYangle
     self.data.linear_acceleration.z = 0
+    self.data.linear_acceleration_covariance =[0.] * 9
     self.pub.publish(self.data)
 
 
