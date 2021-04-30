@@ -36,6 +36,14 @@ class IMU_data:
 
 
         #Kalman filter variables
+        global KFangleY
+        global Q_angle
+        global Q_gyro
+        global y_bias
+        global YP_00
+        global YP_01
+        global YP_10
+        global YP_11
         Q_angle = 0.02
         Q_gyro = 0.0015
         R_angle = 0.005
