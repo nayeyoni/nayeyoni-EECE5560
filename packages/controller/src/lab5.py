@@ -23,7 +23,7 @@ class lab5:
         if mode.state == 'LANE_FOLLOWING':
             self.lane_following_is_ON = True
             rospy.logwarn("NAYE'S NODE")
-        else 
+        else: 
             self.lane_following_is_ON = False
     
     def callback(self, error):
