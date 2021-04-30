@@ -29,7 +29,7 @@ class lab5:
     def callback(self, error):
         self.phi_value = error.phi 
         self.d_value = error.d
-        if self.lane_following_is_ON = True:
+        if self.lane_following_is_ON == True:
             acc1 = self.p.update(self.d_value, 0.1)
             acc2 = self.p.update(self.phi_value, 0.1)
             car_control_msg.v = 0.1
