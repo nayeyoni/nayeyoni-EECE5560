@@ -44,6 +44,13 @@ class IMU_data:
         global YP_01
         global YP_10
         global YP_11
+        global KFangleX
+        global x_bias
+        global XP_00
+        global XP_01
+        global XP_10
+        global XP_11
+        global R_angle
         Q_angle = 0.02
         Q_gyro = 0.0015
         R_angle = 0.005
