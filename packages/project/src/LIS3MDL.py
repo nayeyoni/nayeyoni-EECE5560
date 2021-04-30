@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 LIS3MDL_ADDRESS     = 0x1C
 
 LIS3MDL_WHO_AM_I    = 0x0F
