@@ -1,0 +1,11 @@
+<launch>
+
+  <group ns="$(env VEHICLE_NAME)"> 
+
+    <node pkg="project" name="IMU_calibration" type="IMU_calibration.py"/>
+    <node pkg="project" name="IMU" type="IMU.py"/>
+    <node pkg="project" name="LSM6DSL" type="LSM6DSL.py"/>
+    <node pkg="project" name="LIS3MDL" type="LIS3MDL.py"/>
+  </group>
+
+</launch>

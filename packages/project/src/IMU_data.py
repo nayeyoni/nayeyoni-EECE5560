@@ -18,12 +18,11 @@ class IMU_data:
 
         RAD_TO_DEG = 57.29578
         M_PI = 3.14159265358979323846
-        G_GAIN = 0.070  # [deg/s/LSB]  If you change the dps for gyro, you need to update this value accordingly
-        AA =  0.40      # Complementary filter constant
+        G_GAIN = 0.070  
+        AA =  0.40      
 
 
         ################# Compass Calibration values ############
-        # Use calibrateBerryIMU.py to get calibration values
 
         magXmin =  0
         magYmin =  0
@@ -249,16 +248,12 @@ class IMU_data:
             #This needs to be taken into consideration when performing the calculations
 
             #X compensation
-            if(IMU.BerryIMUversion == 1 or IMU.BerryIMUversion == 3):            #LSM9DS0 and (LSM6DSL & LIS2MDL)
+            if(IMU.BerryIMUversion == 3):            
                 magXcomp = MAGx*math.cos(pitch)+MAGz*math.sin(pitch)
-            else:                                                                #LSM9DS1
-                magXcomp = MAGx*math.cos(pitch)-MAGz*math.sin(pitch)
-
+            
             #Y compensation
-            if(IMU.BerryIMUversion == 1 or IMU.BerryIMUversion == 3):            #LSM9DS0 and (LSM6DSL & LIS2MDL)
+            if(IMU.BerryIMUversion == 3):            
                 magYcomp = MAGx*math.sin(roll)*math.sin(pitch)+MAGy*math.cos(roll)-MAGz*math.sin(roll)*math.cos(pitch)
-            else:                                                                #LSM9DS1
-                magYcomp = MAGx*math.sin(roll)*math.sin(pitch)+MAGy*math.cos(roll)+MAGz*math.sin(roll)*math.cos(pitch)
 
 
 
@@ -289,8 +284,7 @@ class IMU_data:
             self.pub.publish(self.data)
 
 
-            #slow program down a bit, makes the output more readable
-            time.sleep(0.03)
+            time.sleep(1)
 
 if __name__ == '__main__':
     rospy.init_node('IMU_data' , anonymous=True)
