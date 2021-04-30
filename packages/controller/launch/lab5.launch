@@ -37,6 +37,7 @@
 
     <group ns="$(env VEHICLE_NAME)">
         <node pkg="controller" name="lab5" type="lab5.py"/>
+        <node pkg="controller" name="pid_class" type="pid_class.py"/>
     </group>
 
 </launch>

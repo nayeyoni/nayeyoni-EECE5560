@@ -28,27 +28,27 @@ class IMU_calibration:
 
         while True:
 
-        MAGx = IMU.readMAGx()
-        MAGy = IMU.readMAGy()
-        MAGz = IMU.readMAGz()
+            MAGx = IMU.readMAGx()
+            MAGy = IMU.readMAGy()
+            MAGz = IMU.readMAGz()
 
-        if MAGx > magXmax:
-            magXmax = MAGx
-        if MAGy > magYmax:
-            magYmax = MAGy
-        if MAGz > magZmax:
-            magZmax = MAGz
-        if MAGx < magXmin:
-           magXmin = MAGx
-        if MAGy < magYmin:
-           magYmin = MAGy
-        if MAGz < magZmin:
-           magZmin = MAGz
+            if MAGx > magXmax:
+                magXmax = MAGx
+            if MAGy > magYmax:
+               magYmax = MAGy
+            if MAGz > magZmax:
+               magZmax = MAGz
+            if MAGx < magXmin:
+               magXmin = MAGx
+            if MAGy < magYmin:
+               magYmin = MAGy
+            if MAGz < magZmin:
+               magZmin = MAGz
 
-        rospy.logwarn((" magXmin  %i  magYmin  %i  magZmin  %i  ## magXmax  %i  magYmax  %i  magZmax %i  " %(magXmin,magYmin,magZmin,magXmax,magYmax,magZmax)))
+            rospy.logwarn((" magXmin  %i  magYmin  %i  magZmin  %i  ## magXmax  %i  magYmax  %i  magZmax %i  " %(magXmin,magYmin,magZmin,magXmax,magYmax,magZmax)))
 
 
-        time.sleep(1)
+            time.sleep(1)
 
 if __name__ == '__main__':
     rospy.init_node('IMU_calibration' , anonymous=True)
