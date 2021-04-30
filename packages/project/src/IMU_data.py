@@ -24,12 +24,12 @@ class IMU_data:
 
         ################# Compass Calibration values ############
 
-        magXmin =  0
-        magYmin =  0
-        magZmin =  0
-        magXmax =  0
-        magYmax =  0
-        magZmax =  0
+        magXmin =  31261
+        magYmin =  1382
+        magZmin =  29534
+        magXmax =  32621
+        magYmax =  2377
+        magZmax =  31588
 
         ############### END Calibration offsets #################
 
