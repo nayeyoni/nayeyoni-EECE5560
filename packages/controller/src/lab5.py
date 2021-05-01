@@ -16,7 +16,7 @@ class lab5:
         self.phi = pid_class(Kp = -4, Ki = 0, Kd = 0) 
         self.d_value = 0
         self.phi_value = 0
-        car_control_msg = Twist2DStamped()
+        self.car_control_msg = Twist2DStamped()
         self.lane_following_is_ON = False
         
     def state (self, mode):
@@ -32,9 +32,9 @@ class lab5:
         if self.lane_following_is_ON == True:
             acc1 = self.d.update(self.d_value, 0.1)
             acc2 = self.phi.update(self.phi_value, 0.1)
-            car_control_msg.v = 0.3
-            car_control_msg.omega = acc1 + acc2
-            self.pub.publish(car_control_msg)
+            self.car_control_msg.v = 0.3
+            self.car_control_msg.omega = acc1 + acc2
+            self.pub.publish(self.car_control_msg)
         
 if __name__ == '__main__':
     rospy.init_node('lab5', anonymous=True)
