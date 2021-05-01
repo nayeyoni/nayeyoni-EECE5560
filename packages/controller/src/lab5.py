@@ -29,6 +29,7 @@ class lab5:
     def callback(self, error):
         self.phi_value = error.phi 
         self.d_value = error.d
+        rospy.logwarn((" error.phi = %i  error.d = %i " % (error.phi, error.d)))
         if self.lane_following_is_ON == True:
             acc1 = self.d.update(self.d_value, 0.1)
             acc2 = self.phi.update(self.phi_value, 0.1)
