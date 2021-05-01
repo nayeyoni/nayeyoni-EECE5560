@@ -12,8 +12,8 @@ class lab5:
         rospy.Subscriber("/nayebot/fsm_node/mode", FSMState, self.state)
         rospy.Subscriber("/nayebot/lane_filter_node/lane_pose", LanePose, self.callback)
         self.pub = rospy.Publisher("/nayebot/car_cmd_switch_node/cmd", Twist2DStamped, queue_size=10)
-        self.d = pid_class(Kp = -4, Ki = 0, Kd = 0)  
-        self.phi = pid_class(Kp = -4, Ki = 0, Kd = 0) 
+        self.d = pid_class(Kp = -4, Ki = 0.1, Kd = 0)  
+        self.phi = pid_class(Kp = -4, Ki = 0.1, Kd = 0) 
         self.d_value = 0
         self.phi_value = 0
         self.car_control_msg = Twist2DStamped()
