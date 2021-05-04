@@ -12,8 +12,8 @@ class lab5:
         rospy.Subscriber("/mama/fsm_node/mode", FSMState, self.state)
         rospy.Subscriber("/mama/lane_filter_node/lane_pose", LanePose, self.callback)
         self.pub = rospy.Publisher("/mama/car_cmd_switch_node/cmd", Twist2DStamped, queue_size=10)
-        self.d = pid_class(Kp = -4, Ki = 0.1, Kd = 0)  
-        self.phi = pid_class(Kp = -4, Ki = 0.1, Kd = 0) 
+        self.d = pid_class(Kp = -4, Ki = 0, Kd = 0)  
+        self.phi = pid_class(Kp = -4, Ki = 0, Kd = 0) 
         self.d_value = 0
         self.phi_value = 0
         self.car_control_msg = Twist2DStamped()
@@ -33,7 +33,7 @@ class lab5:
             rospy.logwarn("NAYE'S NODE")
             acc1 = self.d.update(self.d_value, 0.001)
             acc2 = self.phi.update(self.phi_value, 0.001)
-            self.car_control_msg.v = 0.3
+            self.car_control_msg.v = 0.18
             self.car_control_msg.omega = acc1 + acc2
             self.pub.publish(self.car_control_msg)
         
