@@ -33,7 +33,7 @@ class lab5:
             rospy.logwarn("NAYE'S NODE")
             acc1 = self.d.update(self.d_value, 0.001)
             acc2 = self.phi.update(self.phi_value, 0.001)
-            self.car_control_msg.v = 0.18
+            self.car_control_msg.v = 0.25
             self.car_control_msg.omega = acc1 + acc2
             self.pub.publish(self.car_control_msg)
         
