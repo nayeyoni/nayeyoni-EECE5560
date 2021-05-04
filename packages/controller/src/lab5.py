@@ -9,9 +9,9 @@ from duckietown_msgs.msg import LanePose
 
 class lab5:
     def __init__(self):
-        rospy.Subscriber("/nayebot/fsm_node/mode", FSMState, self.state)
-        rospy.Subscriber("/nayebot/lane_filter_node/lane_pose", LanePose, self.callback)
-        self.pub = rospy.Publisher("/nayebot/car_cmd_switch_node/cmd", Twist2DStamped, queue_size=10)
+        rospy.Subscriber("/mama/fsm_node/mode", FSMState, self.state)
+        rospy.Subscriber("/mama/lane_filter_node/lane_pose", LanePose, self.callback)
+        self.pub = rospy.Publisher("/mama/car_cmd_switch_node/cmd", Twist2DStamped, queue_size=10)
         self.d = pid_class(Kp = -6, Ki = 0, Kd = 0)  
         self.phi = pid_class(Kp = -6, Ki = 0, Kd = 0) 
         self.d_value = 0
