@@ -9,7 +9,7 @@ from sensor_msgs.msg import Imu
 class duckling:
     def __init__(self):
         rospy.Subscriber("/mama/IMU_data", Imu, self.callback)
-        self.pub = rospy.Publisher("/nayebot/lane_controller_node/car_cmd", Twist2DStamped, queue_size=10)
+        self.pub = rospy.Publisher("/nayebot/joy_mapper_node/car_cmd", Twist2DStamped, queue_size=10)
         self.pub_msg = Twist2DStamped()
         self.pub_msg.header = std_msgs.msg.Header()
         self.pub_msg.header.stamp = rospy.Time.now()
