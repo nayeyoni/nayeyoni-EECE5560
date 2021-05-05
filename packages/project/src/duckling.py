@@ -23,23 +23,23 @@ class duckling:
 
     def callback(self, data):
         if self.lane_following_is_ON == True:
-            if data.accelaration.x and data.accelaration.y ////////////////////////////////////:
-                while (data.accelaration.x and data.accelaration.y////////////////////////////////////):
+            if (self.data.linear_acceleration.x > 1 and self.data.linear_acceleration.x < 5) and (self.data.angular_velocity.x > 245):
+                while ((self.data.linear_acceleration.x > 1 and self.data.linear_acceleration.x < 5) and (self.data.angular_velocity.x > 245)):
                     self.pub_msg.v=0.4099999964237213
                     self.pub_msg.omega = 0
                     self.pub.publish(self.pub_msg)
-            elif data.accelaration.x and data.accelaration.y ////////////////////////////////////:
-                while (data.accelaration.x and data.accelaration.y ////////////////////////////////////):
+            elif (self.data.linear_acceleration.y > 0 and self.data.linear_acceleration.y < 5) and (self.data.angular_velocity.x > 245):
+                while ((self.data.linear_acceleration.y > 0 and self.data.linear_acceleration.y < 5) and (self.data.angular_velocity.x > 245)):
                     self.pub_msg.v=0
                     self.pub_msg.omega = 2.5
                     self.pub.publish(self.pub_msg)
-            elif data.accelaration.x and data.accelaration.y ////////////////////////////////////:
-                while (data.accelaration.x and data.accelaration.y ////////////////////////////////////):
+            elif (self.data.angular_velocity.z > 15 and self.data.angular_velocity.z < 25) and (self.data.angular_velocity.y > 0.5 and self.data.angular_velocity.y < 2.5):
+                while ((self.data.angular_velocity.z > 15 and self.data.angular_velocity.z < 25) and (self.data.angular_velocity.y > 0.5 and self.data.angular_velocity.y < 2.5)):
                     self.pub_msg.v=0
                     self.pub_msg.omega = -2.5
                     self.pub.publish(self.pub_msg)
-            elif data.accelaration.x and data.accelaration.y ////////////////////////////////////:
-                while (data.accelaration.x and data.accelaration.y ////////////////////////////////////):
+            elif (self.data.angular_velocity.z > 0 and self.data.angular_velocity.z < 0.5):
+                while (self.data.angular_velocity.z > 0 and self.data.angular_velocity.z < 0.5):
                     self.pub_msg.v= -0.4099999964237213
                     self.pub_msg.omega = 0
                     self.pub.publish(self.pub_msg)
