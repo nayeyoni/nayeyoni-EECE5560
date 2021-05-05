@@ -8,7 +8,7 @@ from sensor_msgs.msg import Imu
 
 class duckling:
     def __init__(self):
-        rospy.Subscriber("/nayebot/fsm_node/mode", FSMState, self.mode)
+        rospy.Subscriber("/nayebot/fsm_node/mode", FSMState, self.state)
         rospy.Subscriber("/mama/IMU_data", Imu, self.callback)
         self.pub = rospy.Publisher("/nayebot/lane_controller_node/car_cmd", Twist2DStamped, queue_size=10)
         self.pub_msg = Twist2DStamped()
