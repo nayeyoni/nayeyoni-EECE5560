@@ -167,17 +167,17 @@ def readMAGz():
 def initIMU():
 
     
-    if(BerryIMUversion == 3):       #For BerryIMUv3
-        #initialise the accelerometer
-        writeByte(LSM6DSL_ADDRESS,LSM6DSL_CTRL1_XL,0b10011111)           #ODR 3.33 kHz, +/- 8g , BW = 400hz
-        writeByte(LSM6DSL_ADDRESS,LSM6DSL_CTRL8_XL,0b11001000)           #Low pass filter enabled, BW9, composite filter
-        writeByte(LSM6DSL_ADDRESS,LSM6DSL_CTRL3_C,0b01000100)            #Enable Block Data update, increment during multi byte read
+    if(BerryIMUversion == 3):       
+        
+        writeByte(LSM6DSL_ADDRESS,LSM6DSL_CTRL1_XL,0b10011111)           
+        writeByte(LSM6DSL_ADDRESS,LSM6DSL_CTRL8_XL,0b11001000)           
+        writeByte(LSM6DSL_ADDRESS,LSM6DSL_CTRL3_C,0b01000100)            
 
-        #initialise the gyroscope
-        writeByte(LSM6DSL_ADDRESS,LSM6DSL_CTRL2_G,0b10011100)            #ODR 3.3 kHz, 2000 dps
+        
+        writeByte(LSM6DSL_ADDRESS,LSM6DSL_CTRL2_G,0b10011100)            
 
-        #initialise the magnetometer
-        writeByte(LIS3MDL_ADDRESS,LIS3MDL_CTRL_REG1, 0b11011100)         # Temp sesnor enabled, High performance, ODR 80 Hz, FAST ODR disabled and Selft test disabled.
-        writeByte(LIS3MDL_ADDRESS,LIS3MDL_CTRL_REG2, 0b00100000)         # +/- 8 gauss
-        writeByte(LIS3MDL_ADDRESS,LIS3MDL_CTRL_REG3, 0b00000000)         # Continuous-conversion mode
+        
+        writeByte(LIS3MDL_ADDRESS,LIS3MDL_CTRL_REG1, 0b11011100)         
+        writeByte(LIS3MDL_ADDRESS,LIS3MDL_CTRL_REG2, 0b00100000)         
+        writeByte(LIS3MDL_ADDRESS,LIS3MDL_CTRL_REG3, 0b00000000)         
 

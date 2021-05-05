@@ -1,0 +1,8 @@
+<launch>
+  <group ns="$(env VEHICLE_NAME)"> 
+
+    <node pkg="project" name="mpu_data" type="mpu_data.py"/>
+
+  </group>
+
+</launch>

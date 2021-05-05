@@ -11,7 +11,7 @@ from sensor_msgs.msg import Imu
 
 class IMU_data:
     def __init__(self):
-        self.pub = rospy.Publisher("IMU_data", Imu, queue_size=10)
+        self.pub = rospy.Publisher("/mama/IMU_data", Imu, queue_size=10)
         self.data = Imu()
         self.data.header = std_msgs.msg.Header()
         self.data.header.stamp = rospy.Time.now()
