@@ -8,41 +8,34 @@ from sensor_msgs.msg import Imu
 
 class duckling:
     def __init__(self):
-        rospy.Subscriber("/nayebot/fsm_node/mode", FSMState, self.state)
         rospy.Subscriber("/mama/IMU_data", Imu, self.callback)
         self.pub = rospy.Publisher("/nayebot/lane_controller_node/car_cmd", Twist2DStamped, queue_size=10)
         self.pub_msg = Twist2DStamped()
         self.pub_msg.header = std_msgs.msg.Header()
         self.pub_msg.header.stamp = rospy.Time.now()
 
-    def state (self, mode):
-        if mode.state == 'LANE_FOLLOWING':
-            self.lane_following_is_ON = True
-        else: 
-            self.lane_following_is_ON = False
 
     def callback(self, data):
-        if self.lane_following_is_ON == True:
-            if (self.data.linear_acceleration.x > 1 and self.data.linear_acceleration.x < 5) and (self.data.angular_velocity.x > 245):
-                while ((self.data.linear_acceleration.x > 1 and self.data.linear_acceleration.x < 5) and (self.data.angular_velocity.x > 245)):
-                    self.pub_msg.v=0.4099999964237213
-                    self.pub_msg.omega = 0
-                    self.pub.publish(self.pub_msg)
-            elif (self.data.linear_acceleration.y > 0 and self.data.linear_acceleration.y < 5) and (self.data.angular_velocity.x > 245):
-                while ((self.data.linear_acceleration.y > 0 and self.data.linear_acceleration.y < 5) and (self.data.angular_velocity.x > 245)):
-                    self.pub_msg.v=0
-                    self.pub_msg.omega = 2.5
-                    self.pub.publish(self.pub_msg)
-            elif (self.data.angular_velocity.z > 15 and self.data.angular_velocity.z < 25) and (self.data.angular_velocity.y > 0.5 and self.data.angular_velocity.y < 2.5):
-                while ((self.data.angular_velocity.z > 15 and self.data.angular_velocity.z < 25) and (self.data.angular_velocity.y > 0.5 and self.data.angular_velocity.y < 2.5)):
-                    self.pub_msg.v=0
-                    self.pub_msg.omega = -2.5
-                    self.pub.publish(self.pub_msg)
-            elif (self.data.angular_velocity.z > 0 and self.data.angular_velocity.z < 0.5):
-                while (self.data.angular_velocity.z > 0 and self.data.angular_velocity.z < 0.5):
-                    self.pub_msg.v= -0.4099999964237213
-                    self.pub_msg.omega = 0
-                    self.pub.publish(self.pub_msg)
+        if (self.data.linear_acceleration.x > 1 and self.data.linear_acceleration.x < 5) and (self.data.angular_velocity.x > 245):
+            while ((self.data.linear_acceleration.x > 1 and self.data.linear_acceleration.x < 5) and (self.data.angular_velocity.x > 245)):
+                self.pub_msg.v=0.4099999964237213
+                self.pub_msg.omega = 0
+                self.pub.publish(self.pub_msg)
+        elif (self.data.linear_acceleration.y > 0 and self.data.linear_acceleration.y < 5) and (self.data.angular_velocity.x > 245):
+            while ((self.data.linear_acceleration.y > 0 and self.data.linear_acceleration.y < 5) and (self.data.angular_velocity.x > 245)):
+                self.pub_msg.v=0
+                self.pub_msg.omega = 2.5
+                self.pub.publish(self.pub_msg)
+        elif (self.data.angular_velocity.z > 15 and self.data.angular_velocity.z < 25) and (self.data.angular_velocity.y > 0.5 and self.data.angular_velocity.y < 2.5):
+            while ((self.data.angular_velocity.z > 15 and self.data.angular_velocity.z < 25) and (self.data.angular_velocity.y > 0.5 and self.data.angular_velocity.y < 2.5)):
+                self.pub_msg.v=0
+                self.pub_msg.omega = -2.5
+                self.pub.publish(self.pub_msg)
+        elif (self.data.angular_velocity.z > 0 and self.data.angular_velocity.z < 0.5):
+            while (self.data.angular_velocity.z > 0 and self.data.angular_velocity.z < 0.5):
+                self.pub_msg.v= -0.4099999964237213
+                self.pub_msg.omega = 0
+                self.pub.publish(self.pub_msg)
 
 if __name__ == '__main__':
     rospy.init_node('duckling' , anonymous=True)
